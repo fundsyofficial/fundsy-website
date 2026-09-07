@@ -1,0 +1,29 @@
+/* 3 + 4 combined: direction 4's light serif display over direction 3's
+   shapes — rounded corners, ink outlines, hard offset shadows.
+   Pastel fills only work because the ink stays near-black: contrast comes
+   from the ink against the fill, never from the headline's weight. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Karla:wght@300;400;500;600;700&display=swap');
+:root{
+  --font-display:"Instrument Serif",Georgia,serif;
+  --font-body:Karla,system-ui,sans-serif;
+  --w-display:400;
+  --ls-display:-.014em;
+  --lh-display:1.03;
+  --display-size:clamp(2.7rem,5.4vw,4.5rem);
+  --photo-blend:normal;
+  --tint-op:0;
+  --halftone-op:0;
+  --pill-radius:999px;
+}
+/* Nothing is set above 700 anywhere; size and colour do the hierarchy. */
+.h2{font-size:clamp(1.95rem,3.3vw,2.8rem)}
+.h3{font-family:var(--font-display);font-weight:400;font-size:1.45rem;line-height:1.13;letter-spacing:-.012em}
+.rail-item h4{font-family:var(--font-display);font-weight:400;font-size:1.08rem;line-height:1.22;letter-spacing:-.008em}
+.notch h3,.pcard-body h2,.pcard-body h3{font-family:var(--font-display);font-weight:400}
+.m-flat h3{font-family:var(--font-display);font-weight:400}
+body{font-weight:400}
+.nav a{font-weight:500}
+.btn,.pill,.chip,.m-row,.dl-item span:first-child{font-weight:600}
+.meta,.rail-date,.pcard-meta{font-weight:400}
+.logo{font-family:var(--font-display);font-weight:400;letter-spacing:-.03em;font-size:1.85rem}
+.dl-days{font-weight:700}

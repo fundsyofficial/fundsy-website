@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fundsy — three directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;700;800&family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Karla:wght@400;500;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#232326;font-family:Archivo,system-ui,sans-serif}
+.lab{max-width:1180px;margin:0 auto;padding:26px 32px 12px;color:#fff;
+  font-size:.8125rem;letter-spacing:.02em;display:flex;gap:14px;align-items:baseline;flex-wrap:wrap}
+.lab b{font-size:1.05rem;letter-spacing:0}
+.lab span{opacity:.6}
+.stage{padding:0 0 42px}
+.inner{max-width:1180px;margin:0 auto;padding:52px 32px 56px}
+.grid3{display:grid;grid-template-columns:1.6fr 1fr;gap:34px;align-items:start}
+.row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:40px}
+.shot{position:relative;overflow:hidden;height:210px}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot .cap{position:absolute;left:0;right:0;bottom:0;padding:14px 16px}
+.spec{margin-top:34px;font-size:.8125rem;line-height:1.7;opacity:.75}
+h1{margin:0}
+p{margin:0}
+
+/* ============ 1 — SCREEN-PRINT FLYER ============ */
+.d1{background:#fff;color:#0A0A0A}
+.d1 h1{font-family:"Big Shoulders Display",sans-serif;font-weight:800;
+  font-size:clamp(2.9rem,6.6vw,5.4rem);line-height:.94;letter-spacing:-.01em;text-transform:none}
+.d1 .sub{font-size:1.0625rem;line-height:1.55;max-width:46ch;margin-top:20px}
+.d1 .btn{display:inline-block;padding:13px 26px;border:3px solid #0A0A0A;background:#FF3A20;color:#fff;
+  font-weight:600;font-size:.9375rem;text-decoration:none;border-radius:0}
+.d1 .btn.alt{background:#FFD400;color:#0A0A0A}
+.d1 .flag{background:#0B27C4;color:#fff;padding:20px;border:3px solid #0A0A0A}
+.d1 .flag h3{font-family:"Big Shoulders Display",sans-serif;font-weight:800;font-size:1.9rem;
+  line-height:.94;margin:8px 0 6px}
+.d1 .tag{display:inline-block;background:#FFD400;color:#0A0A0A;padding:3px 10px;
+  font-size:.75rem;font-weight:700;letter-spacing:.02em}
+.d1 .shot{border:3px solid #0A0A0A}
+.d1 .shot img{filter:grayscale(1) contrast(1.5)}
+.d1 .shot .cap{background:#FF3A20;color:#fff;font-weight:600;font-size:.9375rem}
+.d1 .shot.y .cap{background:#FFD400;color:#0A0A0A}
+.d1 .shot.b .cap{background:#0B27C4;color:#fff}
+.d1 .rule{height:6px;background:#0A0A0A;margin:34px 0 0}
+
+/* ============ 2 — CAMPUS MAGAZINE ============ */
+.d2{background:#EDEFE8;color:#17251C}
+.d2 h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+  font-size:clamp(2.9rem,6.4vw,5.3rem);line-height:1.02;letter-spacing:-.015em}
+.d2 h1 em{font-style:italic;color:#C0442C}
+.d2 .sub{font-family:Karla,sans-serif;font-size:1.0625rem;line-height:1.65;max-width:46ch;
+  margin-top:22px;color:#3E4E44}
+.d2 .btn{display:inline-block;padding:13px 26px;background:#17251C;color:#EDEFE8;font-family:Karla,sans-serif;
+  font-weight:700;font-size:.9375rem;text-decoration:none;border-radius:3px;border:1px solid #17251C}
+.d2 .btn.alt{background:transparent;color:#17251C}
+.d2 .flag{background:#fff;padding:22px;border:1px solid rgba(23,37,28,.18);border-radius:3px}
+.d2 .flag h3{font-family:"Instrument Serif",serif;font-weight:400;font-size:1.6rem;line-height:1.12;margin:10px 0 7px}
+.d2 .tag{display:inline-block;font-family:Karla,sans-serif;font-size:.6875rem;font-weight:700;
+  color:#C0442C;border-bottom:1px solid #C0442C;padding-bottom:2px}
+.d2 .shot{border-radius:3px}
+.d2 .shot img{filter:saturate(.72) contrast(1.02)}
+.d2 .shot .cap{font-family:Karla,sans-serif;background:linear-gradient(transparent,rgba(23,37,28,.9));
+  color:#EDEFE8;font-weight:500;font-size:.9375rem;padding-top:40px}
+.d2 .rule{height:1px;background:rgba(23,37,28,.25);margin:34px 0 0}
+.d2 p,.d2 .spec{font-family:Karla,sans-serif}
+
+/* ============ 3 — SATURATED RISO ============ */
+.d3{background:#fff;color:#111}
+.d3 h1{font-family:Syne,sans-serif;font-weight:800;font-size:clamp(2.1rem,4.1vw,3.35rem);
+  line-height:1.04;letter-spacing:-.028em}
+.d3 .sub{font-family:Karla,sans-serif;font-size:1.0625rem;line-height:1.6;max-width:46ch;margin-top:20px;color:#444}
+.d3 .btn{display:inline-block;padding:13px 26px;background:#FF3D8B;color:#fff;font-family:Karla,sans-serif;
+  font-weight:700;font-size:.9375rem;text-decoration:none;border-radius:999px;border:2px solid #111}
+.d3 .btn.alt{background:#fff;color:#111}
+.d3 .flag{background:#0F5AE0;color:#fff;padding:22px;border:2px solid #111;border-radius:14px}
+.d3 .flag h3{font-family:Syne,sans-serif;font-weight:800;font-size:1.5rem;line-height:1.06;margin:10px 0 7px}
+.d3 .tag{display:inline-block;background:#00A95C;color:#fff;padding:4px 11px;border-radius:999px;
+  font-family:Karla,sans-serif;font-size:.75rem;font-weight:700;border:2px solid #111}
+.d3 .shot{border:2px solid #111;border-radius:14px}
+.d3 .shot img{filter:saturate(1.35) contrast(1.08)}
+.d3 .shot .cap{font-family:Karla,sans-serif;background:linear-gradient(transparent,rgba(17,17,17,.88));
+  color:#fff;font-weight:600;font-size:.9375rem;padding-top:40px}
+.d3 .rule{height:3px;background:#111;margin:34px 0 0}
+.d3 p,.d3 .spec{font-family:Karla,sans-serif}
+</style>
+</head>
+<body>
+
+<!-- ================= 1 ================= -->
+<div class="lab"><b>1 &nbsp;Screen-print flyer</b>
+  <span>Big Shoulders Display + Archivo &nbsp;·&nbsp; black, signal red, acid yellow, flat blue &nbsp;·&nbsp; square corners, 3px rules</span></div>
+<section class="stage d1"><div class="inner">
+  <div class="grid3">
+    <div>
+      <h1>College in DFW gets cheaper when somebody tells you where to look.</h1>
+      <p class="sub">Fundsy keeps one running list of the scholarships, discounts, free food and
+        local spots we&rsquo;ve actually used. No sign-up, no paywall.</p>
+      <p style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="#">Start with the resources</a>
+        <a class="btn alt" href="#">See this week&rsquo;s picks</a>
+      </p>
+    </div>
+    <div class="flag">
+      <span class="tag">Scholarships</span>
+      <h3>Terry Foundation, closes Dec 15</h3>
+      <p style="font-size:.9375rem;line-height:1.5">Full tuition plus a living stipend for Texas students.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="shot"><img src="../assets/img/busride.jpg" alt=""><div class="cap">Getting around without a car</div></div>
+    <div class="shot y"><img src="../assets/img/market.jpg" alt=""><div class="cap">Eat for under ten dollars</div></div>
+    <div class="shot b"><img src="../assets/img/coffee.jpg" alt=""><div class="cap">Ceci&rsquo;s Coffee, Arlington</div></div>
+  </div>
+  <div class="rule"></div>
+  <p class="spec">Headline: Big Shoulders Display 800, condensed, set very large &mdash; the weight is in the
+    width, not the boldness. Body: Archivo 400. Photos knocked to hard black and white so the colour
+    only ever comes from the flat blocks.</p>
+</div></section>
+
+<!-- ================= 2 ================= -->
+<div class="lab"><b>2 &nbsp;Campus magazine</b>
+  <span>Instrument Serif + Karla &nbsp;·&nbsp; sage ground, green-black ink, brick, mustard &nbsp;·&nbsp; hairlines, lots of air</span></div>
+<section class="stage d2"><div class="inner">
+  <div class="grid3">
+    <div>
+      <h1>College in DFW gets cheaper when <em>somebody tells you</em> where to look.</h1>
+      <p class="sub">Fundsy keeps one running list of the scholarships, discounts, free food and
+        local spots we&rsquo;ve actually used. No sign-up, no paywall.</p>
+      <p style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="#">Start with the resources</a>
+        <a class="btn alt" href="#">See this week&rsquo;s picks</a>
+      </p>
+    </div>
+    <div class="flag">
+      <span class="tag">Scholarships</span>
+      <h3>Terry Foundation, closes Dec 15</h3>
+      <p style="font-size:.9375rem;line-height:1.55;color:#3E4E44">Full tuition plus a living stipend for Texas students.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="shot"><img src="../assets/img/busride.jpg" alt=""><div class="cap">Getting around without a car</div></div>
+    <div class="shot"><img src="../assets/img/market.jpg" alt=""><div class="cap">Eat for under ten dollars</div></div>
+    <div class="shot"><img src="../assets/img/coffee.jpg" alt=""><div class="cap">Ceci&rsquo;s Coffee, Arlington</div></div>
+  </div>
+  <div class="rule"></div>
+  <p class="spec">Headline: Instrument Serif 400 &mdash; a light, high-contrast serif set large, with the
+    italic carrying the emphasis instead of a heavier weight. Body: Karla 400. Nothing on the page is
+    set above 700. Photos stay in natural colour, slightly desaturated.</p>
+</div></section>
+
+<!-- ================= 3 ================= -->
+<div class="lab"><b>3 &nbsp;Saturated riso</b>
+  <span>Syne + Karla &nbsp;·&nbsp; white, full-strength riso pink, blue, green &nbsp;·&nbsp; black outlines, soft radius</span></div>
+<section class="stage d3"><div class="inner">
+  <div class="grid3">
+    <div>
+      <h1>College in DFW gets cheaper when somebody tells you where to look.</h1>
+      <p class="sub">Fundsy keeps one running list of the scholarships, discounts, free food and
+        local spots we&rsquo;ve actually used. No sign-up, no paywall.</p>
+      <p style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="btn" href="#">Start with the resources</a>
+        <a class="btn alt" href="#">See this week&rsquo;s picks</a>
+      </p>
+    </div>
+    <div class="flag">
+      <span class="tag">Scholarships</span>
+      <h3>Terry Foundation, closes Dec 15</h3>
+      <p style="font-size:.9375rem;line-height:1.5">Full tuition plus a living stipend for Texas students.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="shot"><img src="../assets/img/busride.jpg" alt=""><div class="cap">Getting around without a car</div></div>
+    <div class="shot"><img src="../assets/img/market.jpg" alt=""><div class="cap">Eat for under ten dollars</div></div>
+    <div class="shot"><img src="../assets/img/coffee.jpg" alt=""><div class="cap">Ceci&rsquo;s Coffee, Arlington</div></div>
+  </div>
+  <div class="rule"></div>
+  <p class="spec">Headline: Syne 800 &mdash; wide, slightly odd letterforms that don&rsquo;t read as a
+    standard bold sans. Body: Karla 400. Same riso idea as the current build but the colours run at
+    full strength instead of tinted pale, and photos keep their own colour.</p>
+</div></section>
+
+</body>
+</html>

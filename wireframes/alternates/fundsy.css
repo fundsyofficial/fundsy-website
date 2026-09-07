@@ -1,0 +1,312 @@
+/* ==========================================================================
+   Fundsy — Phase 1 wireframe styles
+   Design tokens + the handful of signature components. Each block below maps
+   to a Next.js component in Phase 3 (noted in the comments).
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+/* --- Tokens ------------------------------------------------------------- */
+:root{
+  --paper:#F0EEF9;        /* page ground, pale periwinkle */
+  --paper-deep:#E3DEF6;   /* alternating band */
+  --card:#FFFFFF;
+  --ink:#1E2470;          /* every piece of text, every border */
+  --ink-soft:rgba(30,36,112,.66);
+  --ink-hair:rgba(30,36,112,.16);
+  --pink:#FF5B8D;
+  --sun:#FFC94A;
+  --mint:#67D6C0;
+  --lilac:#C0A9F0;
+
+  --shadow:4px 4px 0 var(--ink);
+  --shadow-sm:3px 3px 0 var(--ink);
+  --radius:18px;
+  --radius-sm:12px;
+}
+
+/* --- Base --------------------------------------------------------------- */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Instrument Sans",ui-sans-serif,system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,.display{
+  font-family:"Bricolage Grotesque","Instrument Sans",sans-serif;
+  font-variation-settings:'wdth' 100,'opsz' 48;
+  font-weight:800;
+  margin:0;
+  letter-spacing:-.025em;
+  line-height:1.02;
+}
+p{margin:0}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--pink);outline-offset:3px;border-radius:4px}
+
+.display{font-size:clamp(2.35rem,4.6vw,3.6rem);line-height:.96;letter-spacing:-.035em}
+.h2{font-size:clamp(1.85rem,3.4vw,2.6rem)}
+.h3{font-size:1.2rem;letter-spacing:-.015em}
+.prose{max-width:62ch;line-height:1.65}
+.meta{font-size:.8125rem;color:var(--ink-soft);line-height:1.45}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.wrap-wide{max-width:1300px;margin:0 auto;padding:0 24px}
+
+/* --- Header nav (Phase 3: <SiteHeader/>) -------------------------------- */
+.hdr{position:sticky;top:0;z-index:50;background:rgba(240,238,249,.92);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink)}
+.hdr-row{display:flex;align-items:center;gap:20px;height:78px}
+.logo{font-family:"Bricolage Grotesque",sans-serif;font-variation-settings:'wdth' 88;font-weight:800;font-size:1.6rem;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;gap:6px}
+.logo span{color:var(--pink)}
+.nav{display:none;margin-left:auto;align-items:center;gap:clamp(12px,1.5vw,20px)}
+.nav a{font-size:.8438rem;white-space:nowrap;font-weight:500;text-decoration:none}
+.nav a:not(.btn){padding:4px 0;border-bottom:2px solid transparent}
+.nav a:not(.btn):hover{border-bottom-color:var(--pink)}
+.nav a[aria-current="page"]{border-bottom-color:var(--ink);font-weight:600}
+.burger{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--card);border:2px solid var(--ink);border-radius:999px;padding:7px 14px;font:inherit;font-size:.875rem;font-weight:600;box-shadow:var(--shadow-sm);cursor:pointer}
+.drawer{display:none;border-top:2px solid var(--ink);background:var(--card);padding:8px 0 20px}
+.drawer[data-open="true"]{display:block}
+.drawer a:not(.btn){display:block;padding:11px 0;text-decoration:none;font-weight:500;border-bottom:1px solid var(--ink-hair)}
+.drawer .btn{margin-top:18px}
+@media(min-width:1120px){.nav{display:flex}.burger{display:none}.drawer{display:none!important}}
+
+/* --- Buttons (Phase 3: <Button variant/>) ------------------------------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:600;font-size:1rem;
+  padding:13px 24px;border:2px solid var(--ink);border-radius:999px;text-decoration:none;cursor:pointer;
+  box-shadow:var(--shadow);transition:transform .12s ease,box-shadow .12s ease}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn:active{transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.btn-pink{background:var(--pink);color:var(--ink)}
+.btn-sun{background:var(--sun);color:var(--ink)}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-mint{background:var(--mint);color:var(--ink)}
+.btn-plain{background:var(--card);color:var(--ink)}
+.btn-sm{font-size:.875rem;padding:9px 18px;box-shadow:var(--shadow-sm)}
+
+/* --- Flat cards: things you read (hairline, no shadow) ------------------ */
+.card{background:var(--card);border:2px solid var(--ink);border-radius:var(--radius)}
+.card-hair{background:var(--card);border:1px solid var(--ink-hair);border-radius:var(--radius)}
+
+/* --- Tiles: things you click (shadow = clickable) ----------------------- */
+.tile{display:block;background:var(--card);border:2px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow);text-decoration:none;padding:22px;transition:transform .12s ease,box-shadow .12s ease}
+.tile:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+
+/* --- Pinned notes (Phase 3: <PinnedNote/>) ------------------------------ */
+.note{position:relative;border:2px solid var(--ink);border-radius:var(--radius-sm);padding:20px 20px 18px}
+.note::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+  width:16px;height:16px;border-radius:999px;background:var(--ink);
+  box-shadow:inset 3px 3px 0 rgba(255,255,255,.45)}
+.note-sun{background:var(--sun)} .note-mint{background:var(--mint)}
+.note-pink{background:var(--pink)} .note-lilac{background:var(--lilac)}
+
+/* Tape strip, used once or twice — never as general decoration */
+.tape{position:absolute;width:86px;height:24px;background:rgba(255,201,74,.72);
+  border-left:1px dashed rgba(30,36,112,.25);border-right:1px dashed rgba(30,36,112,.25)}
+
+/* --- Tear-off tab strip (Phase 3: <TearOffNav/>) ------------------------ */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;border-top:2px dashed var(--ink-hair);padding-top:14px;margin-top:26px}
+.tab{background:var(--paper);border:2px solid var(--ink);border-top:none;
+  border-radius:0 0 10px 10px;padding:7px 11px 9px;font-size:.75rem;font-weight:600;text-decoration:none;
+  transition:transform .12s ease}
+.tab:hover{transform:translateY(3px)}
+
+/* --- Category colour key (heading marker + sidebar dot) ---------------- */
+.key{width:15px;height:15px;border-radius:5px;border:2px solid var(--ink);flex:none;display:inline-block}
+
+/* --- Pills / tags ------------------------------------------------------- */
+.pill{display:inline-block;font-size:.75rem;font-weight:600;padding:4px 11px;border-radius:999px;border:1.5px solid var(--ink);background:var(--card)}
+.pill-sun{background:var(--sun)} .pill-mint{background:var(--mint)}
+.pill-pink{background:var(--pink)} .pill-lilac{background:var(--lilac)}
+
+/* --- Image placeholders ------------------------------------------------- */
+.ph{display:flex;align-items:center;justify-content:center;text-align:center;
+  border:2px dashed rgba(30,36,112,.3);border-radius:var(--radius-sm);color:var(--ink-soft);
+  font-size:.75rem;font-weight:600;padding:12px;
+  background-image:repeating-linear-gradient(45deg,rgba(30,36,112,.055) 0 9px,transparent 9px 18px)}
+
+/* --- Bands -------------------------------------------------------------- */
+.band{border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.band-pink{background:var(--pink)} .band-mint{background:var(--mint)}
+.band-deep{background:var(--paper-deep)}
+
+/* --- Forms (Phase 3: <Field/>, <Dropzone/>) ----------------------------- */
+.label{display:block;font-weight:600;font-size:.9375rem;margin-bottom:7px}
+.hint{font-size:.8125rem;color:var(--ink-soft);margin-top:6px}
+.input,.select,.textarea{width:100%;font:inherit;font-size:1rem;color:var(--ink);background:var(--card);
+  border:2px solid var(--ink);border-radius:var(--radius-sm);padding:12px 14px}
+.textarea{min-height:150px;resize:vertical}
+.select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%231E2470' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
+.input::placeholder,.textarea::placeholder{color:rgba(30,36,112,.42)}
+.drop{position:relative;border:2px dashed var(--ink);border-radius:var(--radius);background:var(--card);padding:30px 22px;text-align:center;cursor:pointer;display:block}
+.drop:hover{background:#FBFAFF}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{font:inherit;font-size:.875rem;font-weight:600;padding:10px 16px;border:2px solid var(--ink);
+  border-radius:999px;background:var(--card);color:var(--ink);cursor:pointer}
+.seg button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.9375rem}
+.check input{margin-top:4px;width:18px;height:18px;accent-color:#1E2470}
+
+/* --- Footer ------------------------------------------------------------- */
+.ftr{background:var(--ink);color:var(--paper);border-top:2px solid var(--ink)}
+.ftr a{text-decoration:none;opacity:.82}
+.ftr a:hover{opacity:1;text-decoration:underline;text-underline-offset:3px}
+
+/* --- Links in prose ----------------------------------------------------- */
+.lnk{font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;
+  text-decoration-color:var(--pink)}
+.lnk:hover{text-decoration-color:var(--ink)}
+
+/* --- The one orchestrated motion moment: the hero board settling in ----- */
+@keyframes settle{from{opacity:0;transform:translateY(14px) rotate(0deg)}}
+.settle{animation:settle .5s cubic-bezier(.2,.8,.3,1) backwards}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .btn:hover,.tile:hover,.tab:hover{transform:none}
+}
+
+/* Rotations are a desktop-only flourish */
+@media(min-width:768px){
+  .rot-a{transform:rotate(-1.6deg)} .rot-b{transform:rotate(1.2deg)}
+  .rot-c{transform:rotate(-.9deg)} .rot-d{transform:rotate(1.8deg)}
+}
+
+/* ==========================================================================
+   PHOTOGRAPHY + EDITORIAL LAYOUT
+   Added after the first review: the wireframes needed real images, the bento
+   image grid from the Go Gym shot, and the Featured rail from Enjooy.
+   ========================================================================== */
+
+/* --- House photo treatment ---------------------------------------------
+   Every photograph gets the same light riso wash: the section colour laid
+   into it, the shadows lifted toward ink blue, halftone dots on top. Kept
+   deliberately light — a full two-ink duotone flattened every image into a
+   colour block and you could no longer tell a bus from a bakery. At this
+   strength the photo still reads, but a page of mixed sources still looks
+   like one page. Phase 3: <Photo tone="sun" src=... />
+------------------------------------------------------------------------- */
+.duo{position:relative;overflow:hidden;isolation:isolate;background:var(--tone,var(--sun))}
+.duo>img{width:100%;height:100%;object-fit:cover;display:block;
+  filter:grayscale(.6) contrast(1.02) brightness(1.04);mix-blend-mode:multiply}
+.duo::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:var(--ink);mix-blend-mode:lighten;opacity:.32}
+.duo::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+  background:url(../assets/halftone.svg) repeat;background-size:10px 10px;opacity:.07;
+  mix-blend-mode:multiply}
+.tone-sun{--tone:var(--sun)} .tone-mint{--tone:var(--mint)}
+.tone-pink{--tone:var(--pink)} .tone-lilac{--tone:var(--lilac)}
+.tone-paper{--tone:#EDE9FB}
+
+/* --- Section heading with a rule running out to the margin (Enjooy) ----- */
+.rule-head{display:flex;align-items:center;gap:20px;white-space:nowrap}
+.rule-head::after{content:"";flex:1 1 auto;height:2px;background:var(--ink-hair);min-width:24px}
+
+/* --- Photo card: image full-bleed, words over a scrim (Enjooy) ---------- */
+.pcard{position:relative;display:block;overflow:hidden;text-decoration:none;
+  border:2px solid var(--ink);border-radius:var(--radius);color:var(--paper);
+  transition:transform .14s ease,box-shadow .14s ease}
+a.pcard:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.pcard>.duo{position:absolute;inset:0}
+.pcard-top{position:absolute;top:14px;left:14px;z-index:3}
+.pcard-body{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:20px 20px 18px;
+  background:linear-gradient(to top,rgba(17,21,68,.94) 22%,rgba(17,21,68,.72) 62%,transparent)}
+.pcard-body h2,.pcard-body h3{color:var(--paper);margin-bottom:6px}
+.pcard-body p{font-size:.875rem;line-height:1.5;color:rgba(240,238,249,.86)}
+.pcard-meta{font-size:.75rem;font-weight:600;color:rgba(240,238,249,.8);margin-bottom:8px}
+
+/* --- Bento image grid (Go Gym) ------------------------------------------
+   Deliberately unequal cells: the lead story is a tall image, the rest are a
+   mix of image and flat colour so the grid never reads as six identical cards.
+   Phase 3: <BoardMosaic/>
+------------------------------------------------------------------------- */
+.mosaic{display:grid;gap:14px}
+@media(min-width:900px){
+  .mosaic{grid-template-columns:1.35fr 1.1fr .78fr;
+          grid-template-rows:minmax(0,1.04fr) minmax(0,.96fr);height:620px}
+  .m-lead{grid-row:span 2}
+}
+
+/* Text panel notched into the corner of the lead image */
+.notch{position:absolute;left:0;bottom:0;z-index:3;background:var(--paper);color:var(--ink);
+  padding:16px 26px 18px 22px;border-radius:0 26px 0 0;max-width:90%}
+/* One concave sweep, where the panel's left edge runs up into the card's.
+   A matching wedge on the right read as a convex bulge, so it's gone. */
+.notch::before{content:"";position:absolute;left:0;bottom:100%;width:26px;height:26px;
+  background:radial-gradient(circle at 100% 0,transparent 25.5px,var(--paper) 26px)}
+
+/* Flat colour cell — carries a headline and two follow-on links, no image */
+.m-flat{display:flex;flex-direction:column;border:2px solid var(--ink);
+  border-radius:var(--radius);overflow:hidden}
+.m-flat-body{padding:22px 22px 18px;flex:1}
+.m-row{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  padding:13px 22px;border-top:2px solid var(--ink);text-decoration:none;
+  font-size:.875rem;font-weight:600;line-height:1.3}
+.m-row:hover{background:rgba(255,255,255,.42)}
+.m-row time{font-weight:500;opacity:.72;white-space:nowrap;font-size:.8125rem}
+
+/* Chip cloud cell */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--card);border:1.5px solid var(--ink);border-radius:999px;
+  padding:6px 13px;font-size:.8125rem;font-weight:600;text-decoration:none}
+.chip:hover{background:var(--sun)}
+.circ{width:44px;height:44px;border-radius:999px;border:2px solid var(--ink);
+  background:var(--card);display:flex;align-items:center;justify-content:center;flex:none}
+
+/* --- Featured rail (Enjooy) ---------------------------------------------
+   Small square thumb, date, two-line title. Phase 3: <FeaturedRail/>
+------------------------------------------------------------------------- */
+.rail{display:grid;gap:26px;align-content:start}
+.rail-item{display:grid;grid-template-columns:74px 1fr;gap:14px;align-items:start;
+  text-decoration:none;padding-bottom:18px;border-bottom:1px solid var(--ink-hair)}
+.rail-item:last-child{border-bottom:none;padding-bottom:0}
+.rail-thumb{width:74px;height:74px;border-radius:12px;border:2px solid var(--ink)}
+.rail-item h4{font-size:.9375rem;line-height:1.28;letter-spacing:-.01em}
+.rail-item:hover h4{text-decoration:underline;text-decoration-thickness:2px;
+  text-underline-offset:3px;text-decoration-color:var(--pink)}
+.rail-date{font-size:.75rem;color:var(--ink-soft);margin-bottom:5px}
+
+/* Deadline list — different information, so a different shape from the thumbs */
+.dl-item{display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding:11px 0;border-bottom:1px solid var(--ink-hair);text-decoration:none;font-size:.9375rem}
+.dl-item:last-child{border-bottom:none}
+.dl-item span:first-child{font-weight:600;line-height:1.3}
+.dl-days{font-size:.75rem;font-weight:700;white-space:nowrap;padding:3px 9px;
+  border-radius:999px;border:1.5px solid var(--ink);background:var(--sun)}
+.dl-days.soon{background:var(--pink)}
+
+/* --- Pinned photo on the hero board ------------------------------------- */
+.snap{position:relative;border:2px solid var(--ink);border-radius:var(--radius-sm);
+  background:var(--card);padding:9px 9px 0}
+.snap::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+  width:16px;height:16px;border-radius:999px;background:var(--ink);z-index:4;
+  box-shadow:inset 3px 3px 0 rgba(255,255,255,.45)}
+.snap .duo{border-radius:7px;aspect-ratio:4/5}
+.snap figcaption{padding:9px 2px 10px;font-size:.8125rem;font-weight:600;line-height:1.3}
+
+/* --- Hero ground -------------------------------------------------------- */
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:url(../assets/topo.svg) no-repeat center top;background-size:1600px auto}
+.hero>*{position:relative;z-index:1}
+
+/* --- Instagram tiles ---------------------------------------------------- */
+.ig{aspect-ratio:1;border:2px solid var(--ink);border-radius:var(--radius-sm);display:block}
+.ig:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+
+@media(prefers-reduced-motion:reduce){a.pcard:hover,.ig:hover{transform:none}}
+
+/* --- Team initials: a placeholder that doesn't put a stranger's face next
+       to an ambassador's name. Phase 3: real portraits replace these. ------ */
+.avatar{width:52px;height:52px;border-radius:999px;border:2px solid var(--ink);flex:none;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:.875rem;
+  letter-spacing:-.02em;color:var(--ink)}
+
+/* --- Pills sit on dark photos, so they carry their own colour ------------ */
+.pcard-top.pill{color:var(--ink)}

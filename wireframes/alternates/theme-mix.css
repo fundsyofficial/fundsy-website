@@ -1,0 +1,40 @@
+/* Direction 4 — Mix: the flyer palette with the magazine's typography.
+   Flat poster colour on white, but the display work is done by a light serif
+   rather than a condensed grotesque — bold colour without the shouty
+   headline. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&display=swap');
+:root{
+  --paper:#FFFFFF;  --paper-deep:#F1F1F1;  --card:#FFFFFF;
+  --ink:#0A0A0A;
+  --ink-soft:rgba(10,10,10,.68);
+  --ink-hair:rgba(10,10,10,.2);
+  --pink:#FF3A20;   --sun:#FFD400;   --mint:#4A80FF;   --lilac:#35C77B;
+
+  --font-display:"Instrument Serif",Georgia,serif;
+  --font-body:Archivo,system-ui,sans-serif;
+  --w-display:400;
+  --ls-display:-.012em;
+  --lh-display:1.04;
+  --display-size:clamp(2.7rem,5.6vw,4.6rem);
+
+  --bw:2px; --bw-thin:2px;
+  --radius:6px; --radius-sm:4px; --pill-radius:999px;
+  --shadow:none; --shadow-sm:none;
+
+  --photo-filter:saturate(.9) contrast(1.04);
+  --photo-blend:normal; --tint-op:0; --halftone-op:0;
+  --scrim-a:rgba(10,10,10,.93); --scrim-b:rgba(10,10,10,.66);
+  --on-scrim:rgba(255,255,255,.86);
+  --notch-r:10px;
+  --topo:url(../assets/topo-mix.svg);
+}
+.h2{font-size:clamp(1.9rem,3.2vw,2.7rem)}
+.h3{font-family:var(--font-display);font-weight:400;font-size:1.4rem;line-height:1.14;letter-spacing:-.01em}
+.rail-item h4{font-family:var(--font-display);font-weight:400;font-size:1.0625rem;line-height:1.2}
+.btn{font-weight:700;font-size:.9375rem}
+.pill,.chip{font-weight:600;font-size:.75rem}
+.btn:hover,.tile:hover,a.pcard:hover,.ig:hover{transform:none;box-shadow:none}
+.tile:hover{border-color:var(--ink);background:#fff}
+.btn-pink{background:var(--ink);color:var(--paper)}
+.btn-pink:hover{background:var(--pink);color:#fff}
+.tab:hover{transform:none}

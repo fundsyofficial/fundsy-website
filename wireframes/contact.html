@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contact us — Fundsy</title>
+<meta name="description" content="Share a find, ask a question, partner with Fundsy, or send your resume for a free review by a DFW student.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme:{ extend:{
+  colors:{ paper:'#F0EEF9', paperDeep:'#E3DEF6', ink:'#1E2470', pink:'#FF5B8D', sun:'#FFC94A', mint:'#67D6C0', lilac:'#C0A9F0' },
+  fontFamily:{ display:['"Bricolage Grotesque"','sans-serif'], sans:['"Instrument Sans"','sans-serif'] },
+  boxShadow:{ hard:'4px 4px 0 #1E2470', hardSm:'3px 3px 0 #1E2470' }
+}}};
+</script>
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="theme-p6.css">
+</head>
+<body>
+
+<!-- ============================ HEADER ============================ -->
+<header class="hdr">
+  <div class="wrap hdr-row">
+    <a class="logo" href="index.html">fundsy<span>.</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#">About</a>
+      <a href="resources.html">Resources</a>
+      <a href="#">Opportunities</a>
+      <a href="#">Savings</a>
+      <a href="#">Small businesses &#9825;</a>
+      <a href="#">Team</a>
+      <a href="#">Newsletter</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+      <a class="btn btn-pink btn-sm" href="#share">Share a find</a>
+    </nav>
+    <button class="burger" data-burger aria-controls="drawer" aria-expanded="false">Menu</button>
+  </div>
+  <div class="drawer" id="drawer" data-open="false">
+    <div class="wrap">
+      <a href="index.html">Home</a>
+      <a href="#">About Fundsy</a>
+      <a href="resources.html">Student resources</a>
+      <a href="#">Opportunities</a>
+      <a href="#">Savings + student discounts</a>
+      <a href="#">Small businesses &#9825;</a>
+      <a href="#">Our team</a>
+      <a href="#">Newsletter</a>
+      <a href="contact.html">Contact us</a>
+      <a class="btn btn-pink btn-sm" href="contact.html#share">Share a find</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ======================== PAGE HEADER ============================ -->
+<section class="band" style="background:var(--mint)">
+  <div class="wrap py-14 md:py-20 grid lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-16 items-center">
+    <div>
+      <nav class="meta mb-5" aria-label="Breadcrumb" style="color:var(--ink)">
+        <a class="lnk" href="index.html">Home</a> &nbsp;/&nbsp; Contact us
+      </nav>
+      <h1 class="display mb-5" style="max-width:16ch">Say hi, send a tip, or ask us for help</h1>
+      <p class="prose text-[1.0625rem]">
+        Pick whichever form fits. We&rsquo;ll write back, usually within two or three days.
+      </p>
+    </div>
+    <div class="pcard" style="height:250px">
+      <span class="duo tone-sun"><img src="assets/img/jobs.jpg" alt="Notes and reading glasses on a desk"></span>
+      <div class="pcard-body" style="padding:22px">
+        <h2 class="h3" style="font-size:1.2rem">Who reads these</h2>
+        <p>Amy and Ryan, the two students who started Fundsy. Nothing here goes to a
+          support queue or an automated inbox, and nobody outside the team sees what you send.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FORM LAYOUT ============================
+     One page, four purposes. The segmented control swaps the panel so
+     nobody has to guess which page their message belongs on.
+     Phase 3: <ContactForms/> with a Supabase server action per panel;
+     the resume panel writes to a private storage bucket.
+================================================================= -->
+<div class="wrap py-12 md:py-16 grid lg:grid-cols-[1fr_330px] gap-10 lg:gap-16 items-start">
+
+  <div>
+    <div class="seg mb-8" data-seg role="tablist" aria-label="What are you contacting us about?">
+      <button role="tab" data-panel="p-share"   id="share"   aria-selected="true"  aria-controls="p-share">Share a find</button>
+      <button role="tab" data-panel="p-general" id="general" aria-selected="false" aria-controls="p-general">General question</button>
+      <button role="tab" data-panel="p-partner" id="partner" aria-selected="false" aria-controls="p-partner">Partner with us</button>
+      <button role="tab" data-panel="p-resume"  id="resume"  aria-selected="false" aria-controls="p-resume">Resume help</button>
+    </div>
+
+    <!-- ------------------- Panel: Share a find ------------------- -->
+    <section class="card p-7 md:p-9" id="p-share" role="tabpanel" aria-labelledby="share">
+      <h2 class="h2 mb-3" tabindex="-1" style="outline:none">Know something we should share?</h2>
+      <p class="prose mb-8" style="color:var(--ink-soft)">
+        Scholarships, discounts, free events, a restaurant that quietly takes student IDs &mdash;
+        if it saves a DFW student money, we want it. A student on our team checks every
+        submission before it goes on the board.
+      </p>
+
+      <form action="#" method="post" class="grid sm:grid-cols-2 gap-5">
+        <div class="sm:col-span-2">
+          <label class="label" for="s-name">What&rsquo;s the find?</label>
+          <input class="input" id="s-name" name="find_name" placeholder="Name of the scholarship, discount, event or place">
+        </div>
+        <div>
+          <label class="label" for="s-cat">Which section does it belong in?</label>
+          <select class="select" id="s-cat" name="category">
+            <option>Student resources</option>
+            <option>Opportunities</option>
+            <option>Savings + student discounts</option>
+            <option>Small business spotlight</option>
+            <option>Not sure &mdash; you decide</option>
+          </select>
+        </div>
+        <div>
+          <label class="label" for="s-city">Where is it?</label>
+          <input class="input" id="s-city" name="city" placeholder="Arlington, Denton, online&hellip;">
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for="s-link">Link, if there is one</label>
+          <input class="input" id="s-link" name="link" type="url" placeholder="https://">
+          <p class="hint">An Instagram handle or a phone number works just as well.</p>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for="s-detail">Tell us how it works</label>
+          <textarea class="textarea" id="s-detail" name="details" placeholder="Who qualifies, what you need to bring, any deadline you know about."></textarea>
+        </div>
+        <div>
+          <label class="label" for="s-email">Your email</label>
+          <input class="input" id="s-email" name="email" type="email" placeholder="you@school.edu">
+        </div>
+        <div>
+          <label class="label" for="s-school">Your school <span style="font-weight:400;color:var(--ink-soft)">(optional)</span></label>
+          <input class="input" id="s-school" name="school" placeholder="UT Arlington">
+        </div>
+        <div class="sm:col-span-2">
+          <label class="check"><input type="checkbox" name="credit"><span>Credit me on the listing if you post it.</span></label>
+        </div>
+        <div class="sm:col-span-2 flex flex-wrap items-center gap-5 pt-1">
+          <button class="btn btn-pink" type="submit">Send it in</button>
+          <span class="meta">We read everything, even when we can&rsquo;t post it.</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- ------------------- Panel: General question ------------------- -->
+    <section class="card p-7 md:p-9" id="p-general" role="tabpanel" aria-labelledby="general" hidden>
+      <h2 class="h2 mb-3" tabindex="-1" style="outline:none">Ask us anything</h2>
+      <p class="prose mb-8" style="color:var(--ink-soft)">
+        Questions about a listing, a broken link, joining as an ambassador, or how any of
+        this works. If you&rsquo;re stuck on something and don&rsquo;t know who to ask, start here.
+      </p>
+      <form action="#" method="post" class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="label" for="g-name">Your name</label>
+          <input class="input" id="g-name" name="name" placeholder="First and last">
+        </div>
+        <div>
+          <label class="label" for="g-email">Your email</label>
+          <input class="input" id="g-email" name="email" type="email" placeholder="you@school.edu">
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for="g-topic">What&rsquo;s this about?</label>
+          <select class="select" id="g-topic" name="topic">
+            <option>A question about a listing</option>
+            <option>Something on the site is broken</option>
+            <option>Becoming a campus ambassador</option>
+            <option>Press or an interview</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for="g-msg">Your message</label>
+          <textarea class="textarea" id="g-msg" name="message" placeholder="As much or as little detail as you like."></textarea>
+        </div>
+        <div class="sm:col-span-2 flex flex-wrap items-center gap-5 pt-1">
+          <button class="btn btn-pink" type="submit">Send message</button>
+          <span class="meta">Replies usually land within two or three days.</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- ------------------- Panel: Partner with us ------------------- -->
+    <section class="card p-7 md:p-9" id="p-partner" role="tabpanel" aria-labelledby="partner" hidden>
+      <h2 class="h2 mb-3" tabindex="-1" style="outline:none">Partner with Fundsy</h2>
+      <p class="prose mb-8" style="color:var(--ink-soft)">
+        We work with DFW businesses, campus offices and nonprofits that want to reach students
+        honestly. Spotlights are free for small businesses. Tell us who you are and what
+        you&rsquo;d like to offer students, and we&rsquo;ll come back with what we can do.
+      </p>
+      <form action="#" method="post" class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="label" for="p-org">Business or organisation</label>
+          <input class="input" id="p-org" name="organisation" placeholder="Ceci&rsquo;s Coffee">
+        </div>
+        <div>
+          <label class="label" for="p-contact">Who should we reply to?</label>
+          <input class="input" id="p-contact" name="contact_name" placeholder="Name and role">
+        </div>
+        <div>
+          <label class="label" for="p-email">Email</label>
+          <input class="input" id="p-email" name="email" type="email" placeholder="hello@yourbusiness.com">
+        </div>
+        <div>
+          <label class="label" for="p-site">Website or Instagram</label>
+          <input class="input" id="p-site" name="website" placeholder="@yourbusiness">
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for="p-type">What kind of partnership?</label>
+          <select class="select" id="p-type" name="partner_type">
+            <option>A free small business spotlight</option>
+            <option>A student discount you&rsquo;d like listed</option>
+            <option>An event or campus pop-up</option>
+            <option>Posting a job or internship</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="label" for="p-msg">What would you like students to know?</label>
+          <textarea class="textarea" id="p-msg" name="message" placeholder="What you offer, where you are, and anything students get."></textarea>
+        </div>
+        <div class="sm:col-span-2 flex flex-wrap items-center gap-5 pt-1">
+          <button class="btn btn-pink" type="submit">Send partnership request</button>
+          <span class="meta">Amy handles partnerships and replies personally.</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- ------------------- Panel: Resume help ------------------- -->
+    <section class="card p-7 md:p-9" id="p-resume" role="tabpanel" aria-labelledby="resume" hidden>
+      <h2 class="h2 mb-3" tabindex="-1" style="outline:none">Send us your resume</h2>
+      <p class="prose mb-8" style="color:var(--ink-soft)">
+        Upload it and one of us will read it properly and write back with notes &mdash; what&rsquo;s
+        working, what to cut, and how to describe the job you actually did. It&rsquo;s free, it takes
+        us about a week, and only the Fundsy team sees your file.
+      </p>
+      <form action="#" method="post" enctype="multipart/form-data" class="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label class="label" for="r-name">Your name</label>
+          <input class="input" id="r-name" name="name" placeholder="First and last">
+        </div>
+        <div>
+          <label class="label" for="r-email">Your email</label>
+          <input class="input" id="r-email" name="email" type="email" placeholder="you@school.edu">
+        </div>
+        <div>
+          <label class="label" for="r-school">School</label>
+          <input class="input" id="r-school" name="school" placeholder="UT Dallas">
+        </div>
+        <div>
+          <label class="label" for="r-year">Year</label>
+          <select class="select" id="r-year" name="year">
+            <option>First year</option><option>Sophomore</option><option>Junior</option>
+            <option>Senior</option><option>Graduate student</option><option>Recent graduate</option>
+          </select>
+        </div>
+
+        <div class="sm:col-span-2">
+          <span class="label">Your resume</span>
+          <label class="drop" for="r-file">
+            <span class="h3" style="display:block;margin-bottom:6px">Choose a file, or drop it here</span>
+            <span class="meta" id="r-filename">PDF or Word, up to 10 MB</span>
+            <input type="file" id="r-file" name="resume" accept=".pdf,.doc,.docx" data-filename="r-filename"
+                   style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">
+          </label>
+          <p class="hint">Files are stored privately and deleted once we&rsquo;ve sent you notes.</p>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label class="label" for="r-goal">What are you applying for?</label>
+          <textarea class="textarea" id="r-goal" name="goal" style="min-height:110px"
+                    placeholder="A specific role, an industry, or just &lsquo;anything paid this summer&rsquo; &mdash; all useful to know."></textarea>
+        </div>
+        <div class="sm:col-span-2">
+          <label class="check"><input type="checkbox" name="consent"><span>I&rsquo;m okay with the Fundsy team reading and storing this file until my review is done.</span></label>
+        </div>
+        <div class="sm:col-span-2 flex flex-wrap items-center gap-5 pt-1">
+          <button class="btn btn-pink" type="submit">Send my resume</button>
+          <span class="meta">Reviews go out on Sundays.</span>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <!-- ------------------------- Sidebar ------------------------- -->
+  <aside class="grid gap-6 lg:sticky lg:top-24">
+    <div class="card-hair p-6">
+      <h2 class="h3 mb-3">Rather not use a form?</h2>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li>Email <a class="lnk" href="mailto:hello@fundsy.org">hello@fundsy.org</a></li>
+        <li>DM us <a class="lnk" href="#">@fundsy on Instagram</a></li>
+        <li>Message us on <a class="lnk" href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+
+    <div class="card-hair p-6">
+      <h2 class="h3 mb-3">Looking for something else?</h2>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a class="lnk" href="#">Become a campus ambassador</a></li>
+        <li><a class="lnk" href="#">Read the newsletter</a></li>
+        <li><a class="lnk" href="resources.html">Browse student resources</a></li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+</main>
+
+<!-- ============================ FOOTER ============================= -->
+<footer class="ftr py-14">
+  <div class="wrap grid md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+    <div>
+      <a class="logo" href="index.html" style="color:var(--paper)">fundsy<span style="color:var(--pink)">.</span></a>
+      <p class="mt-3 text-sm max-w-xs" style="opacity:.8">A student-run guide to living and studying in Dallas&ndash;Fort Worth for less.</p>
+      <div class="flex gap-3 mt-5">
+        <a class="btn btn-sm btn-sun" href="#" style="box-shadow:none">Instagram</a>
+        <a class="btn btn-sm btn-mint" href="#" style="box-shadow:none">LinkedIn</a>
+      </div>
+    </div>
+    <div>
+      <h3 class="text-sm mb-3" style="font-weight:700">Explore</h3>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a href="resources.html">Student resources</a></li>
+        <li><a href="#">Opportunities</a></li>
+        <li><a href="#">Savings + discounts</a></li>
+        <li><a href="#">Small businesses</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-sm mb-3" style="font-weight:700">Fundsy</h3>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Our team</a></li>
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="#">Become an ambassador</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-sm mb-3" style="font-weight:700">Get in touch</h3>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a href="contact.html">Contact us</a></li>
+        <li><a href="contact.html#share">Share a find</a></li>
+        <li><a href="contact.html#resume">Resume help</a></li>
+        <li><a href="contact.html#partner">Partner with us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap mt-12 pt-6 text-sm" style="border-top:1px solid rgba(240,238,249,.22);opacity:.7">
+    &copy; 2026 Fundsy. Built by students in Dallas&ndash;Fort Worth.
+  </div>
+</footer>
+
+<script src="fundsy.js"></script>
+</body>
+</html>

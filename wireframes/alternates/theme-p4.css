@@ -1,0 +1,33 @@
+@import url('_pastel-base.css');
+/* D — Pastel with a signal and an anchor.
+   Iteration on C. An all-pastel page on white goes flat, so one cell per
+   screen is a deep aubergine: it gives the eye somewhere to land and makes
+   the pastels read as chosen rather than washed out. Same principle as the
+   signal colour — scarcity is what makes it work. */
+:root{
+  --paper:#FFFFFF;  --paper-deep:#F5F2FA;  --card:#FFFFFF;
+  --ink:#141021;
+  --ink-soft:rgba(20,16,33,.64);
+  --ink-hair:rgba(20,16,33,.15);
+  --pink:#FFC9DC;   --sun:#FFE6A3;   --mint:#A9E3CC;   --lilac:#C0CCF9;
+  --signal:#FF3D8B;
+  --deep:#221C3D;
+
+  --bw:2px; --bw-thin:2px;
+  --radius:16px; --radius-sm:12px; --notch-r:24px;
+  --shadow:4px 4px 0 var(--ink);
+  --shadow-sm:3px 3px 0 var(--ink);
+  --photo-filter:saturate(.96) contrast(1.02);
+  --scrim-a:rgba(20,16,33,.93); --scrim-b:rgba(20,16,33,.64);
+  --on-scrim:rgba(255,255,255,.88);
+  --topo:url(../assets/topo-p3.svg);
+}
+.btn-pink{background:var(--signal);color:var(--ink)}
+.btn-pink:hover{background:var(--ink);color:#fff}
+.dl-days.soon{background:var(--signal)}
+/* The one dark cell */
+.m-flat-b{background:var(--deep);color:#fff}
+.m-flat-b .m-row{border-top-color:rgba(255,255,255,.28)}
+.m-flat-b .m-row:hover{background:rgba(255,255,255,.08)}
+.m-flat-b .chip{border-color:transparent}
+.m-flat-b .m-flat-body{padding-bottom:20px}

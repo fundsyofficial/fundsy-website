@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Student resources — Fundsy</title>
+<meta name="description" content="Transportation, food, healthcare, wellness and academic support for college students across Dallas–Fort Worth.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme:{ extend:{
+  colors:{ paper:'#F0EEF9', paperDeep:'#E3DEF6', ink:'#1E2470', pink:'#FF5B8D', sun:'#FFC94A', mint:'#67D6C0', lilac:'#C0A9F0' },
+  fontFamily:{ display:['"Bricolage Grotesque"','sans-serif'], sans:['"Instrument Sans"','sans-serif'] },
+  boxShadow:{ hard:'4px 4px 0 #1E2470', hardSm:'3px 3px 0 #1E2470' }
+}}};
+</script>
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="theme-p6.css">
+</head>
+<body>
+
+<!-- ============================ HEADER ============================ -->
+<header class="hdr">
+  <div class="wrap hdr-row">
+    <a class="logo" href="index.html">fundsy<span>.</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#">About</a>
+      <a href="resources.html" aria-current="page">Resources</a>
+      <a href="#">Opportunities</a>
+      <a href="#">Savings</a>
+      <a href="#">Small businesses &#9825;</a>
+      <a href="#">Team</a>
+      <a href="#">Newsletter</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-pink btn-sm" href="contact.html#share">Share a find</a>
+    </nav>
+    <button class="burger" data-burger aria-controls="drawer" aria-expanded="false">Menu</button>
+  </div>
+  <div class="drawer" id="drawer" data-open="false">
+    <div class="wrap">
+      <a href="index.html">Home</a>
+      <a href="#">About Fundsy</a>
+      <a href="resources.html">Student resources</a>
+      <a href="#">Opportunities</a>
+      <a href="#">Savings + student discounts</a>
+      <a href="#">Small businesses &#9825;</a>
+      <a href="#">Our team</a>
+      <a href="#">Newsletter</a>
+      <a href="contact.html">Contact us</a>
+      <a class="btn btn-pink btn-sm" href="contact.html#share">Share a find</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ======================= PAGE HEADER =============================
+     Generic content-page header. Swap the band colour and the counts
+     per section: sun for resources, mint for opportunities, pink for
+     savings, lilac for small businesses.
+     Phase 3: <PageHeader tone="sun" .../>
+================================================================= -->
+<section class="band" style="background:var(--sun)">
+  <div class="wrap py-14 md:py-20 grid lg:grid-cols-[1.25fr_1fr] gap-10 lg:gap-14 items-center">
+    <div>
+      <nav class="meta mb-5" aria-label="Breadcrumb" style="color:var(--ink)">
+        <a class="lnk" href="index.html">Home</a> &nbsp;/&nbsp; Student resources
+      </nav>
+      <h1 class="display mb-5">Student resources</h1>
+      <p class="prose text-[1.0625rem] mb-6">
+        The practical stuff: how to get across the metroplex, where to eat when the
+        money runs out, who will see you without insurance, and who to talk to when
+        the semester goes sideways. Every listing is checked by a student on that campus.
+      </p>
+      <p class="meta">48 listings across 5 categories, last checked 3 September 2026</p>
+    </div>
+    <div class="card duo tone-lilac" style="aspect-ratio:4/3;padding:0">
+      <img src="assets/img/transit.jpg" alt="The inside of a DART rail car">
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BODY: SIDEBAR + LIST ==================== -->
+<div class="wrap py-12 md:py-16 grid lg:grid-cols-[276px_1fr] gap-10 lg:gap-14 items-start">
+
+  <!-- In-page nav. Phase 3: <SectionNav/> with scroll spy -->
+  <aside class="rail lg:sticky lg:top-24">
+    <div>
+      <h2 class="h3 rule-head mb-4">On this page</h2>
+      <ul class="space-y-1 text-sm" style="list-style:none;padding:0;margin:0">
+        <li><a class="flex items-center gap-2.5 py-2" style="text-decoration:none;border-bottom:1px solid var(--ink-hair);font-weight:600;" href="#transport"><span class="key" style="background:var(--sun);width:11px;height:11px;border-radius:3px"></span>Transportation <span class="meta">11</span></a></li>
+        <li><a class="flex items-center gap-2.5 py-2" style="text-decoration:none;border-bottom:1px solid var(--ink-hair);" href="#food"><span class="key" style="background:var(--mint);width:11px;height:11px;border-radius:3px"></span>Food <span class="meta">14</span></a></li>
+        <li><a class="flex items-center gap-2.5 py-2" style="text-decoration:none;border-bottom:1px solid var(--ink-hair);" href="#health"><span class="key" style="background:var(--pink);width:11px;height:11px;border-radius:3px"></span>Healthcare <span class="meta">8</span></a></li>
+        <li><a class="flex items-center gap-2.5 py-2" style="text-decoration:none;border-bottom:1px solid var(--ink-hair);" href="#wellness"><span class="key" style="background:var(--lilac);width:11px;height:11px;border-radius:3px"></span>Wellness <span class="meta">7</span></a></li>
+        <li><a class="flex items-center gap-2.5 py-2" style="text-decoration:none;" href="#academics"><span class="key" style="background:var(--ink);width:11px;height:11px;border-radius:3px"></span>Academics <span class="meta">8</span></a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="h3 rule-head mb-4">Featured</h2>
+      <div class="grid gap-4">
+        <a class="rail-item" href="#">
+          <span class="duo tone-mint rail-thumb"><img src="assets/img/pantry.jpg" alt="Produce shelves in a grocery aisle"></span>
+          <div>
+            <p class="rail-date">12 September</p>
+            <h4>Where to eat for under ten dollars near every campus</h4>
+          </div>
+        </a>
+        <a class="rail-item" href="#">
+          <span class="duo tone-sun rail-thumb"><img src="assets/img/busride.jpg" alt="A city bus at a stop"></span>
+          <div>
+            <p class="rail-date">5 September</p>
+            <h4>The TRE, the 64, and getting to Fort Worth for $2.50</h4>
+          </div>
+        </a>
+        <a class="rail-item" href="#">
+          <span class="duo tone-pink rail-thumb"><img src="assets/img/clinic.jpg" alt="A clinician at work"></span>
+          <div>
+            <p class="rail-date">28 August</p>
+            <h4>What to say when a clinic asks about insurance</h4>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="h3 rule-head mb-3">Closing soon</h2>
+      <a class="dl-item" href="#"><span>Campus pantry volunteer sign-up</span><span class="dl-days soon">4 days</span></a>
+      <a class="dl-item" href="#"><span>Free flu clinic, UTD</span><span class="dl-days">12 days</span></a>
+      <a class="dl-item" href="#"><span>Spring bus pass, discounted rate</span><span class="dl-days">26 days</span></a>
+    </div>
+
+    <a class="btn btn-plain btn-sm" href="contact.html#share">Suggest a listing</a>
+  </aside>
+
+  <div>
+    <!-- ---------------- Category: Transportation ---------------- -->
+    <section id="transport" class="mb-16" style="scroll-margin-top:96px">
+      <div class="pcard mb-8" style="height:250px">
+        <span class="duo tone-sun"><img src="assets/img/busride.jpg" alt="A city bus at a downtown stop"></span>
+        <span class="pcard-top pill">11 listings</span>
+        <div class="pcard-body" style="padding:24px">
+          <h2 class="h2 flex items-center gap-3" style="font-size:2rem">
+            <span class="key" style="background:var(--sun)"></span>Transportation</h2>
+          <p style="max-width:56ch">DFW is spread out and most of us are working with a bus pass, a hand-me-down car, or a friend who owes us a favour. Here&rsquo;s what actually helps.</p>
+        </div>
+      </div>
+
+      <!-- Listing row. Phase 3: <ResourceRow/> -->
+      <article class="card-hair p-6 mb-4">
+        <div>
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
+            <h3 class="h3">DART GoPass student semester pass</h3>
+            <span class="pill">Free to apply</span>
+          </div>
+          <p class="prose text-[.9375rem] mb-3" style="color:var(--ink-soft)">
+            $60 for unlimited rail and bus for a full semester, verified with your .edu address.
+            Works on the Red, Blue, Green and Orange lines plus every DART bus and the TRE toward Fort Worth.
+          </p>
+          <a class="lnk text-sm" href="#">Apply through GoPass</a>
+        </div>
+      </article>
+
+      <article class="card-hair p-6 mb-4">
+        <div>
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-2">
+            <h3 class="h3">Campus shuttles that leave the campus</h3>
+            <span class="pill">Free</span>
+          </div>
+          <p class="prose text-[.9375rem] mb-3" style="color:var(--ink-soft)">
+            Four schools run shuttles to grocery stores and rail stations that aren&rsquo;t on the
+            official campus map. Times change every semester, so we re-check them in August and January.
+          </p>
+          <a class="lnk text-sm" href="#">See the routes by campus</a>
+        </div>
+      </article>
+
+      <!-- Pinned tip: one per category, never more. Phase 3: <PinnedTip/> -->
+      <div class="note note-lilac mt-8">
+        <p class="text-sm">
+          If you&rsquo;re commuting to UTA from Dallas, the TRE to CentrePort plus the 64 bus beats
+          driving during rush hour almost every time. &mdash; Priya, UTA &rsquo;27
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------------- Category: Food ---------------- -->
+    <section id="food" class="mb-16" style="scroll-margin-top:96px">
+      <div class="pcard mb-8" style="height:250px">
+        <span class="duo tone-mint"><img src="assets/img/market.jpg" alt="Crates of produce at a market stall"></span>
+        <span class="pcard-top pill">14 listings</span>
+        <div class="pcard-body" style="padding:24px">
+          <h2 class="h2 flex items-center gap-3" style="font-size:2rem">
+            <span class="key" style="background:var(--mint)"></span>Food</h2>
+          <p style="max-width:56ch">Campus pantries, community fridges, and the restaurants that will feed you for under ten dollars. No paperwork required for anything in this section.</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <article class="card-hair p-6">
+          <span class="pill pill-mint mb-3" style="display:inline-block">Open weekly</span>
+          <h3 class="h3 mb-2">Campus food pantries</h3>
+          <p class="text-[.9375rem] mb-3" style="color:var(--ink-soft)">
+            Six pantries across DFW schools. Most ask only for a student ID, and several
+            stock fresh produce on delivery day.
+          </p>
+          <a class="lnk text-sm" href="#">Hours and locations</a>
+        </article>
+        <article class="card-hair p-6">
+          <span class="pill pill-mint mb-3" style="display:inline-block">Any time</span>
+          <h3 class="h3 mb-2">Community fridges near campus</h3>
+          <p class="text-[.9375rem] mb-3" style="color:var(--ink-soft)">
+            Open-access fridges in Oak Cliff, Denton and south Arlington. Take what you need,
+            leave what you can.
+          </p>
+          <a class="lnk text-sm" href="#">Find the nearest one</a>
+        </article>
+      </div>
+
+    </section>
+
+    <!-- ---------------- Category: Healthcare ---------------- -->
+    <section id="health" class="mb-16" style="scroll-margin-top:96px">
+      <div class="pcard mb-8" style="height:250px">
+        <span class="duo tone-pink"><img src="assets/img/clinic.jpg" alt="A clinician preparing a vaccination"></span>
+        <span class="pcard-top pill">8 listings</span>
+        <div class="pcard-body" style="padding:24px">
+          <h2 class="h2 flex items-center gap-3" style="font-size:2rem">
+            <span class="key" style="background:var(--pink)"></span>Healthcare</h2>
+          <p style="max-width:56ch">Where to go without insurance, what your student health fee already covers, and the clinics that charge on a sliding scale.</p>
+        </div>
+      </div>
+
+      <article class="card-hair p-6 mb-4">
+        <div>
+          <h3 class="h3 mb-2">Sliding-scale clinics in Dallas and Tarrant counties</h3>
+          <p class="prose text-[.9375rem] mb-3" style="color:var(--ink-soft)">
+            Nine clinics that set the price against your income, including two that stay open
+            past 7pm on weekdays. Bring a pay stub if you have one; most will work without it.
+          </p>
+          <a class="lnk text-sm" href="#">See the clinic list</a>
+        </div>
+      </article>
+      <article class="card-hair p-6">
+        <div>
+          <h3 class="h3 mb-2">What your student health fee already pays for</h3>
+          <p class="prose text-[.9375rem] mb-3" style="color:var(--ink-soft)">
+            You are probably already covered for basic visits, some vaccines and a set number
+            of counselling sessions. We broke it down school by school.
+          </p>
+          <a class="lnk text-sm" href="#">Check your school</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- ---------------- Category: Wellness ---------------- -->
+    <section id="wellness" class="mb-16" style="scroll-margin-top:96px">
+      <div class="pcard mb-8" style="height:250px">
+        <span class="duo tone-lilac"><img src="assets/img/yoga.jpg" alt="A stretching class in a studio"></span>
+        <span class="pcard-top pill">7 listings</span>
+        <div class="pcard-body" style="padding:24px">
+          <h2 class="h2 flex items-center gap-3" style="font-size:2rem">
+            <span class="key" style="background:var(--lilac)"></span>Wellness</h2>
+          <p style="max-width:56ch">Counselling, crisis lines, free gym access and the quiet places to sit when the library is full.</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <article class="card-hair p-5"><h3 class="h3 mb-2">Free counselling sessions</h3><p class="text-sm" style="color:var(--ink-soft)">How many you get, and how to book without a three-week wait.</p></article>
+        <article class="card-hair p-5"><h3 class="h3 mb-2">24-hour support lines</h3><p class="text-sm" style="color:var(--ink-soft)">Texas and national lines, including text-only options.</p></article>
+        <article class="card-hair p-5"><h3 class="h3 mb-2">Rec centres open to all students</h3><p class="text-sm" style="color:var(--ink-soft)">Four campuses let visiting students in free with an ID.</p></article>
+      </div>
+    </section>
+
+    <!-- ---------------- Category: Academics ---------------- -->
+    <section id="academics" style="scroll-margin-top:96px">
+      <div class="pcard mb-8" style="height:250px">
+        <span class="duo tone-paper"><img src="assets/img/library.jpg" alt="A student working at a desk of books"></span>
+        <span class="pcard-top pill">8 listings</span>
+        <div class="pcard-body" style="padding:24px">
+          <h2 class="h2 flex items-center gap-3" style="font-size:2rem">
+            <span class="key" style="background:var(--ink)"></span>Academics</h2>
+          <p style="max-width:56ch">Tutoring, writing centres, textbook workarounds and the advising appointments worth booking early.</p>
+        </div>
+      </div>
+
+      <article class="card-hair p-6 mb-4">
+        <div>
+          <h3 class="h3 mb-2">Getting textbooks without paying list price</h3>
+          <p class="prose text-[.9375rem] mb-3" style="color:var(--ink-soft)">
+            Library reserves, interlibrary loan, open-access editions and the three
+            rental sites that consistently come out cheapest.
+          </p>
+          <a class="lnk text-sm" href="#">Read the guide</a>
+        </div>
+      </article>
+    </section>
+  </div>
+</div>
+
+<!-- ========================= NEXT SECTION ========================== -->
+<section class="band band-pink py-14">
+  <div class="wrap flex flex-wrap items-center justify-between gap-6">
+    <div>
+      <h2 class="h2 mb-2">Next up: Opportunities</h2>
+      <p class="prose">Scholarships, internships and jobs, sorted by what closes first.</p>
+    </div>
+    <a class="btn btn-ink" href="#">Go to Opportunities</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================= -->
+<footer class="ftr py-14">
+  <div class="wrap grid md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+    <div>
+      <a class="logo" href="index.html" style="color:var(--paper)">fundsy<span style="color:var(--pink)">.</span></a>
+      <p class="mt-3 text-sm max-w-xs" style="opacity:.8">A student-run guide to living and studying in Dallas&ndash;Fort Worth for less.</p>
+      <div class="flex gap-3 mt-5">
+        <a class="btn btn-sm btn-sun" href="#" style="box-shadow:none">Instagram</a>
+        <a class="btn btn-sm btn-mint" href="#" style="box-shadow:none">LinkedIn</a>
+      </div>
+    </div>
+    <div>
+      <h3 class="text-sm mb-3" style="font-weight:700">Explore</h3>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a href="resources.html">Student resources</a></li>
+        <li><a href="#">Opportunities</a></li>
+        <li><a href="#">Savings + discounts</a></li>
+        <li><a href="#">Small businesses</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-sm mb-3" style="font-weight:700">Fundsy</h3>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Our team</a></li>
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="#">Become an ambassador</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-sm mb-3" style="font-weight:700">Get in touch</h3>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a href="contact.html">Contact us</a></li>
+        <li><a href="contact.html#share">Share a find</a></li>
+        <li><a href="contact.html#resume">Resume help</a></li>
+        <li><a href="contact.html#partner">Partner with us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap mt-12 pt-6 text-sm" style="border-top:1px solid rgba(240,238,249,.22);opacity:.7">
+    &copy; 2026 Fundsy. Built by students in Dallas&ndash;Fort Worth.
+  </div>
+</footer>
+
+<script src="fundsy.js"></script>
+</body>
+</html>

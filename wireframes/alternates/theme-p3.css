@@ -1,0 +1,26 @@
+@import url('_pastel-base.css');
+/* C — Pastel with a signal. Everything soft except one colour, kept at full
+   riso strength and spent only on things you act on: the primary button,
+   a deadline about to close, a link. Pastel gets to be pastel because it is
+   never asked to carry urgency. */
+:root{
+  --paper:#FFFFFF;  --paper-deep:#F4F1FA;  --card:#FFFFFF;
+  --ink:#101014;
+  --ink-soft:rgba(16,16,20,.64);
+  --ink-hair:rgba(16,16,20,.15);
+  --pink:#FFC9DC;   --sun:#FFE6A3;   --mint:#A9E3CC;   --lilac:#C0CCF9;
+  --signal:#FF3D8B;
+
+  --bw:2px; --bw-thin:2px;
+  --radius:16px; --radius-sm:12px; --notch-r:24px;
+  --shadow:4px 4px 0 var(--ink);
+  --shadow-sm:3px 3px 0 var(--ink);
+  --photo-filter:saturate(.96) contrast(1.02);
+  --scrim-a:rgba(16,16,20,.93); --scrim-b:rgba(16,16,20,.64);
+  --on-scrim:rgba(255,255,255,.88);
+  --topo:url(../assets/topo-p3.svg);
+}
+.btn-pink{background:var(--signal);color:var(--ink)}
+.btn-pink:hover{background:var(--ink);color:#fff}
+.dl-days.soon{background:var(--signal)}
+.pcard-top.pill{border-color:var(--ink)}

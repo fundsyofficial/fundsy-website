@@ -1,0 +1,25 @@
+@import url('_pastel-base.css');
+/* B — Warm oat. Same type, warmer and quieter: an oat ground, softer pastels,
+   thinner outlines and no offset shadow. The most gentle of the three, and
+   the one that risks going bland if the photos are weak. */
+:root{
+  --paper:#FBF8F3;  --paper-deep:#F2ECE2;  --card:#FFFFFF;
+  --ink:#221D1A;
+  --ink-soft:rgba(34,29,26,.66);
+  --ink-hair:rgba(34,29,26,.18);
+  --pink:#F3B7B0;   --sun:#F6D49B;   --mint:#B7CBA8;   --lilac:#CBBEE3;
+  --signal:#C4544A;
+
+  --bw:1.5px; --bw-thin:1.5px;
+  --radius:22px; --radius-sm:16px; --notch-r:26px;
+  --shadow:none; --shadow-sm:none;
+  --photo-filter:saturate(.86) contrast(1.01);
+  --scrim-a:rgba(34,29,26,.92); --scrim-b:rgba(34,29,26,.6);
+  --on-scrim:rgba(251,248,243,.88);
+  --topo:url(../assets/topo-p2.svg);
+}
+.btn-pink{background:var(--ink);color:var(--paper)}
+.btn-pink:hover{background:var(--signal);color:#fff}
+.btn:hover,.tile:hover,a.pcard:hover,.ig:hover{transform:none;box-shadow:none}
+.tile:hover{background:var(--paper-deep)}
+.tab:hover{transform:none}

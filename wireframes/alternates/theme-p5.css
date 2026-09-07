@@ -1,0 +1,58 @@
+/* Direction 4, in the pastel palette.
+   Instrument Serif does the display work at 400 and Archivo carries the text —
+   nothing is set above 700 anywhere. Flat: 2px ink outlines, small radius, no
+   offset shadows. The pastels only hold up because the ink is near-black.
+
+   The wordmark is Syne, kept from direction 3. It is the one place a third
+   face is worth it: a logo should not dissolve into the headlines around it,
+   and the serif at small sizes does exactly that. Swap it with --font-logo. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
+:root{
+  --paper:#FFFFFF;  --paper-deep:#F5F2FA;  --card:#FFFFFF;
+  --ink:#0A0A0A;
+  --ink-soft:rgba(10,10,10,.64);
+  --ink-hair:rgba(10,10,10,.16);
+
+  /* Pastel set carried over from the previous round */
+  --pink:#FFC9DC;   --sun:#FFE6A3;   --mint:#A9E3CC;   --lilac:#C0CCF9;
+  --signal:#FF3D8B;
+
+  --font-display:"Instrument Serif",Georgia,serif;
+  --font-body:Archivo,system-ui,sans-serif;
+  --font-logo:Syne,system-ui,sans-serif;
+  --w-logo:800;
+  --logo-size:1.5rem;
+  --logo-ls:-.055em;
+
+  --w-display:400;
+  --ls-display:-.014em;
+  --lh-display:1.03;
+  --display-size:clamp(2.7rem,5.4vw,4.5rem);
+
+  --bw:2px; --bw-thin:2px;
+  --radius:6px; --radius-sm:4px; --notch-r:10px; --pill-radius:999px;
+  --shadow:none; --shadow-sm:none;
+
+  --photo-filter:saturate(.94) contrast(1.03);
+  --photo-blend:normal; --tint-op:0; --halftone-op:0;
+  --scrim-a:rgba(10,10,10,.93); --scrim-b:rgba(10,10,10,.64);
+  --on-scrim:rgba(255,255,255,.87);
+  --topo:url(../assets/topo-mix.svg);
+}
+.h2{font-size:clamp(1.95rem,3.3vw,2.8rem)}
+.h3{font-family:var(--font-display);font-weight:400;font-size:1.45rem;line-height:1.13;letter-spacing:-.012em}
+.rail-item h4{font-family:var(--font-display);font-weight:400;font-size:1.08rem;line-height:1.22}
+.notch h3,.pcard-body h2,.pcard-body h3,.m-flat h3{font-family:var(--font-display);font-weight:400}
+body{font-weight:400}
+.nav a{font-weight:500}
+.btn,.pill,.chip,.m-row,.dl-item span:first-child{font-weight:600}
+.meta,.rail-date,.pcard-meta{font-weight:400}
+.dl-days{font-weight:700}
+
+/* Flat throughout — hover changes ink, never position. */
+.btn:hover,.tile:hover,a.pcard:hover,.ig:hover{transform:none;box-shadow:none}
+.tile:hover{background:var(--paper-deep)}
+.tab:hover{transform:none;background:var(--paper-deep)}
+.btn-pink{background:var(--signal);color:var(--ink)}
+.btn-pink:hover{background:var(--ink);color:#fff}
+.dl-days.soon{background:var(--signal)}

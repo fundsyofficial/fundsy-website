@@ -1,0 +1,40 @@
+/* Direction 2 — Campus magazine.
+   Nothing on the page is set above 700. A light high-contrast serif does the
+   display work and the italic carries emphasis where a bolder cut normally
+   would. Hairlines instead of heavy borders, and a lot more air. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Karla:wght@300;400;500;600;700&display=swap');
+:root{
+  --paper:#EDEFE8;  --paper-deep:#E2E6DA;  --card:#FFFFFF;
+  --ink:#17251C;
+  --ink-soft:rgba(23,37,28,.7);
+  --ink-hair:rgba(23,37,28,.2);
+  --pink:#D0553A;   --sun:#E0A32E;   --mint:#3E9B86;   --lilac:#9E6B96;
+
+  --font-display:"Instrument Serif",Georgia,serif;
+  --font-body:Karla,system-ui,sans-serif;
+  --w-display:400;
+  --ls-display:-.012em;
+  --lh-display:1.04;
+  --display-size:clamp(2.7rem,5.6vw,4.6rem);
+
+  --bw:1px; --bw-thin:1px;
+  --radius:4px; --radius-sm:3px; --pill-radius:999px;
+  --shadow:none; --shadow-sm:none;
+
+  --photo-filter:saturate(.72) contrast(1.02);
+  --photo-blend:normal; --tint-op:0; --halftone-op:0;
+  --scrim-a:rgba(23,37,28,.92); --scrim-b:rgba(23,37,28,.62);
+  --on-scrim:rgba(237,239,232,.86);
+  --notch-r:8px;
+  --topo:url(../assets/topo-magazine.svg);
+}
+.h2{font-size:clamp(1.9rem,3.2vw,2.7rem)}
+.h3{font-family:var(--font-display);font-weight:400;font-size:1.4rem;line-height:1.14;letter-spacing:-.01em}
+.rail-item h4{font-family:var(--font-display);font-weight:400;font-size:1.0625rem;line-height:1.2}
+.btn{font-weight:700;font-size:.9375rem}
+.pill,.chip{font-weight:600;font-size:.75rem}
+.btn:hover,.tile:hover,a.pcard:hover,.ig:hover{transform:none;box-shadow:none}
+.tile:hover{border-color:var(--ink);background:#fff}
+.btn-pink{background:var(--ink);color:var(--paper)}
+.btn-pink:hover{background:var(--pink);color:#fff}
+.tab:hover{transform:none}

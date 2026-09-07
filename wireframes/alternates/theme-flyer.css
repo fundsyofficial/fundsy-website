@@ -1,0 +1,39 @@
+/* Direction 1 — Screen-print flyer.
+   The headline is condensed, so its presence comes from width and size rather
+   than weight. Square corners, thick rules, no shadows, photos in hard black
+   and white so colour only ever arrives as a flat block. */
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Archivo:wght@400;500;600;700&display=swap');
+:root{
+  --paper:#FFFFFF;  --paper-deep:#F1F1F1;  --card:#FFFFFF;
+  --ink:#0A0A0A;
+  --ink-soft:rgba(10,10,10,.68);
+  --ink-hair:rgba(10,10,10,.22);
+  --pink:#FF3A20;   --sun:#FFD400;   --mint:#4A80FF;   --lilac:#35C77B;
+
+  --font-display:"Big Shoulders Display",system-ui,sans-serif;
+  --font-body:Archivo,system-ui,sans-serif;
+  --w-display:800;
+  --ls-display:-.005em;
+  --lh-display:.92;
+  --display-size:clamp(2.9rem,6.2vw,5.2rem);
+
+  --bw:3px; --bw-thin:2px;
+  --radius:0px; --radius-sm:0px; --pill-radius:0px;
+  --shadow:none; --shadow-sm:none;
+
+  --photo-filter:grayscale(1) contrast(1.4) brightness(1.02);
+  --photo-blend:normal; --tint-op:0; --halftone-op:.1;
+  --scrim-a:rgba(10,10,10,.95); --scrim-b:rgba(10,10,10,.7);
+  --on-scrim:rgba(255,255,255,.86);
+  --notch-r:0px;
+  --topo:url(../assets/topo-flyer.svg);
+}
+h2.h2,h3.h3{letter-spacing:0}
+.h3{font-size:1.35rem;line-height:1.02}
+/* Nothing lifts or floats — hover swaps ink instead. */
+.btn:hover,.tile:hover,a.pcard:hover,.ig:hover{transform:none;box-shadow:none}
+.tile:hover{background:var(--sun)}
+.btn-pink:hover{background:var(--ink);color:#fff}
+.btn-plain:hover{background:var(--sun)}
+.tab:hover{transform:none;background:var(--sun)}
+.rail-thumb{border-radius:0}

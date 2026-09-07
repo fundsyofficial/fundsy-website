@@ -1,0 +1,46 @@
+/* Direction 3 — Saturated riso.
+   Riso inks at full strength on white. Weight does not carry the hierarchy:
+   the display face sits at 700, subheads at 600, body at 400, and the jumps
+   between them are made with size and colour instead of boldness. */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Karla:wght@300;400;500;600;700&display=swap');
+:root{
+  --paper:#FFFFFF;  --paper-deep:#F4F2EF;  --card:#FFFFFF;
+  --ink:#111111;
+  --ink-soft:rgba(17,17,17,.66);
+  --ink-hair:rgba(17,17,17,.16);
+
+  /* Every accent clears 4.5:1 against the ink, so text on a colour band
+     never needs a second rule. */
+  --pink:#FF3D8B;   --sun:#FF9F1A;   --mint:#00B368;   --lilac:#3A7BFF;
+
+  --font-display:Syne,system-ui,sans-serif;
+  --font-body:Karla,system-ui,sans-serif;
+  --w-display:700;
+  --ls-display:-.03em;
+  --lh-display:1.02;
+  --display-size:clamp(2.1rem,4vw,3.3rem);
+
+  --bw:2px; --bw-thin:2px;
+  --radius:16px; --radius-sm:12px; --pill-radius:999px;
+  --shadow:4px 4px 0 var(--ink);
+  --shadow-sm:3px 3px 0 var(--ink);
+
+  --photo-filter:saturate(1.08) contrast(1.03);
+  --photo-blend:normal; --tint-op:0; --halftone-op:.05;
+  --scrim-a:rgba(17,17,17,.93); --scrim-b:rgba(17,17,17,.66);
+  --on-scrim:rgba(255,255,255,.88);
+  --notch-r:26px;
+  --topo:url(../assets/topo-riso.svg);
+}
+body{font-weight:400}
+h1,h2,h3,h4,.display{font-weight:var(--w-display)}
+.h3{font-weight:600;letter-spacing:-.018em}
+.rail-item h4,.m-row,.dl-item span:first-child{font-weight:600}
+.nav a{font-weight:500}
+.btn{font-weight:600}
+.pill,.chip{font-weight:600}
+.meta,.rail-date{font-weight:400}
+.logo{letter-spacing:-.05em}
+/* Riso colour is flat and full strength — no soft tints anywhere. */
+.note-sun{background:var(--sun)} .note-mint{background:var(--mint)}
+.note-pink{background:var(--pink)} .note-lilac{background:var(--lilac)}

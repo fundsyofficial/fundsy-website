@@ -1,0 +1,24 @@
+@import url('_pastel-base.css');
+/* A — Soft riso. The direction 3 hues pulled back to pastel, held together by
+   a near-black ink. Primary action is the ink itself, because a pastel button
+   can't out-shout a pastel card. */
+:root{
+  --paper:#FFFFFF;  --paper-deep:#F6F3EE;  --card:#FFFFFF;
+  --ink:#16161A;
+  --ink-soft:rgba(22,22,26,.64);
+  --ink-hair:rgba(22,22,26,.16);
+  --pink:#FFB3CC;   --sun:#FFDE8A;   --mint:#9EDCC0;   --lilac:#B6C4F7;
+  --signal:#16161A;
+
+  --bw:2px; --bw-thin:2px;
+  --radius:16px; --radius-sm:12px; --notch-r:24px;
+  --shadow:4px 4px 0 var(--ink);
+  --shadow-sm:3px 3px 0 var(--ink);
+  --photo-filter:saturate(.94) contrast(1.02);
+  --scrim-a:rgba(22,22,26,.93); --scrim-b:rgba(22,22,26,.64);
+  --on-scrim:rgba(255,255,255,.88);
+  --topo:url(../assets/topo-p1.svg);
+}
+.btn-pink{background:var(--ink);color:#fff}
+.btn-pink:hover{background:#000}
+.dl-days.soon{background:var(--ink);color:#fff}

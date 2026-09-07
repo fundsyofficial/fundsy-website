@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fundsy — direction 1 — Screen-print flyer</title>
+<meta name="description" content="A student-run board of the discounts, scholarships, free food, and local spots that DFW college students actually use.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+/* Phase 3: paste this straight into tailwind.config.ts */
+tailwind.config = {
+  theme: { extend: {
+    colors: { paper:'#F0EEF9', paperDeep:'#E3DEF6', ink:'#1E2470', pink:'#FF5B8D', sun:'#FFC94A', mint:'#67D6C0', lilac:'#C0A9F0' },
+    fontFamily: { display:['"Bricolage Grotesque"','sans-serif'], sans:['"Instrument Sans"','sans-serif'] },
+    boxShadow: { hard:'4px 4px 0 #1E2470', hardSm:'3px 3px 0 #1E2470' }
+  }}
+};
+</script>
+<link rel="stylesheet" href="../base.css">
+<link rel="stylesheet" href="theme-flyer.css">
+</head>
+<body>
+
+<div style="background:#232326;color:#fff;font:600 13px/1 ui-sans-serif,system-ui;padding:11px 24px;letter-spacing:.01em">
+  Direction 1 — Screen-print flyer
+  <span style="opacity:.55;font-weight:400;margin-left:12px">homepage &middot; compare at directions.html</span>
+</div>
+
+<!-- ============================ HEADER ============================ -->
+<header class="hdr">
+  <div class="wrap hdr-row">
+    <a class="logo" href="../index.html">fundsy<span>.</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#">About</a>
+      <a href="../resources.html">Resources</a>
+      <a href="#">Opportunities</a>
+      <a href="#">Savings</a>
+      <a href="#">Small businesses &#9825;</a>
+      <a href="#">Team</a>
+      <a href="#">Newsletter</a>
+      <a href="../contact.html">Contact</a>
+      <a class="btn btn-pink btn-sm" href="../contact.html#share">Share a find</a>
+    </nav>
+    <button class="burger" data-burger aria-controls="drawer" aria-expanded="false">Menu</button>
+  </div>
+  <div class="drawer" id="drawer" data-open="false">
+    <div class="wrap">
+      <a href="../index.html">Home</a>
+      <a href="#">About Fundsy</a>
+      <a href="../resources.html">Student resources</a>
+      <a href="#">Opportunities</a>
+      <a href="#">Savings + student discounts</a>
+      <a href="#">Small businesses &#9825;</a>
+      <a href="#">Our team</a>
+      <a href="#">Newsletter</a>
+      <a href="../contact.html">Contact us</a>
+      <a class="btn btn-pink btn-sm" href="../contact.html#share">Share a find</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ HERO ==============================
+     The hero is a flyer: headline, the ask, and a real perforated tear-off
+     strip whose tabs are the section nav. Beside it, a pinned board mixing
+     notes and photographs. Contour texture on the ground is the paper the
+     board is pinned to.
+     Phase 3: <Hero/> + <TearOffNav/> + <PinnedNote/> + <PinnedPhoto/>
+================================================================= -->
+<section class="hero pt-12 pb-16 md:pt-16 md:pb-24">
+  <div class="wrap grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-start">
+
+    <!-- The flyer -->
+    <div class="card relative p-7 md:p-10 settle" style="animation-delay:.02s">
+      <div class="tape" style="top:-12px;left:36px;transform:rotate(-6deg)"></div>
+      <p class="meta mb-4">Made by students at UTD, UTA, SMU, TCU and UNT</p>
+      <h1 class="display mb-5">College in DFW gets cheaper when somebody tells you where to look.</h1>
+      <p class="prose text-[1.0625rem] mb-7" style="color:var(--ink-soft)">
+        Fundsy keeps one running list of the scholarships, discounts, free food, campus services
+        and local spots we&rsquo;ve actually used. No sign-up, no paywall &mdash; just the stuff we wish
+        someone had handed us freshman year.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a class="btn btn-pink" href="../resources.html">Start with the resources</a>
+        <a class="btn btn-plain" href="#week">See this week&rsquo;s picks</a>
+      </div>
+
+      <!-- Tear-off tabs: the signature device, doing navigation work -->
+      <div class="tabs">
+        <a class="tab" href="../resources.html">Student resources</a>
+        <a class="tab" href="#">Opportunities</a>
+        <a class="tab" href="#">Savings</a>
+        <a class="tab" href="#">Small businesses &#9825;</a>
+      </div>
+    </div>
+
+    <!-- The board -->
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div class="grid gap-8 content-start">
+        <figure class="snap rot-a settle m-0" style="animation-delay:.10s">
+          <span class="duo tone-sun block"><img src="../assets/img/transit.jpg" alt="A DART rail platform at dusk"></span>
+          <figcaption>DART GoPass &mdash; $60 for the whole semester</figcaption>
+        </figure>
+        <article class="note note-pink rot-c settle" style="animation-delay:.22s">
+          <span class="pill">Scholarships</span>
+          <h2 class="h3 mt-3 mb-1">Terry Foundation, closes Dec 15</h2>
+          <p class="text-sm">Full tuition plus a living stipend for Texas students. Two essays, one recommendation.</p>
+        </article>
+      </div>
+      <div class="grid gap-8 content-start sm:mt-14">
+        <article class="note note-mint rot-b settle" style="animation-delay:.16s">
+          <span class="pill">Food</span>
+          <h2 class="h3 mt-3 mb-1">Free groceries, Thursdays</h2>
+          <p class="text-sm">Campus pantries at four DFW schools, no income paperwork. Bring a tote and a student ID.</p>
+        </article>
+        <figure class="snap rot-d settle m-0" style="animation-delay:.28s">
+          <span class="duo tone-lilac block"><img src="../assets/img/bakery.jpg" alt="A decorated cake on a bakery counter"></span>
+          <figcaption>Bishop Arts bakery &mdash; 15% off before 11am</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== THIS WEEK: MOSAIC + RAIL ====================
+     Two borrowed patterns. The mosaic is the unequal bento image grid — one
+     tall lead image, a flat colour cell, a wide image, a narrow image, a chip
+     cloud — so the week never reads as a row of identical cards. The rail on
+     the right is the Featured column: small square thumb, date, short title.
+     Phase 3: <BoardMosaic/> + <FeaturedRail/>
+================================================================= -->
+<section id="week" class="band band-deep py-16 md:py-20">
+  <div class="wrap-wide">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <h2 class="h2 rule-head" style="flex:1 1 460px">On the board this week</h2>
+      <a class="lnk text-sm" href="#">Everything we added in September</a>
+    </div>
+
+    <div class="grid lg:grid-cols-[minmax(0,1fr)_290px] gap-10 lg:gap-12 items-start">
+
+      <!-- ---------------------- The mosaic ---------------------- -->
+      <div class="mosaic">
+
+        <!-- Lead: tall image with a notched text panel cut into the corner -->
+        <a class="pcard m-lead" href="#" style="min-height:300px">
+          <span class="duo tone-sun"><img src="../assets/img/busride.jpg" alt="A city bus pulling up to a stop"></span>
+          <span class="pcard-top pill">Transportation</span>
+          <div class="notch">
+            <p class="meta mb-1">Updated 3 September</p>
+            <h3 class="h3" style="font-size:1.35rem;max-width:14ch">How to actually get around DFW without a car</h3>
+          </div>
+        </a>
+
+        <!-- Flat colour cell: a headline and two follow-on links, no image -->
+        <div class="m-flat" style="background:var(--sun)">
+          <div class="m-flat-body">
+            <span class="pill">Opportunities</span>
+            <h3 class="h3 mt-3 mb-2" style="font-size:clamp(1.15rem,1.6vw,1.4rem)">23 internships are taking applications right now</h3>
+            <p class="text-sm">Paid roles across Dallas and Fort Worth, sorted by deadline. Nine of them
+              don&rsquo;t ask for any prior experience.</p>
+          </div>
+          <a class="m-row" href="#"><span>Scholarships closing this month</span><time>7 open</time></a>
+          <a class="m-row" href="#"><span>Campus jobs that fit a class schedule</span><time>16 open</time></a>
+        </div>
+
+        <!-- Narrow tall image -->
+        <a class="pcard" href="#" style="min-height:230px">
+          <span class="duo tone-lilac"><img src="../assets/img/coffee.jpg" alt="Stools along the counter of a small coffee shop"></span>
+          <span class="pcard-top pill">Small business</span>
+          <div class="pcard-body">
+            <p class="pcard-meta">September spotlight</p>
+            <h3 class="h3" style="font-size:1.05rem">Ceci&rsquo;s Coffee, nine years by the UTA gates</h3>
+          </div>
+        </a>
+
+        <!-- Wide image -->
+        <a class="pcard" href="#" style="min-height:230px">
+          <span class="duo tone-mint"><img src="../assets/img/pantry.jpg" alt="Shelves of produce in a food pantry"></span>
+          <span class="pcard-top pill">Food</span>
+          <div class="pcard-body">
+            <h3 class="h3" style="font-size:1.15rem">The four campus pantries that never ask for paperwork</h3>
+            <p>Open weekly at UTD, UTA, UNT and Dallas College. Bring a tote and a student ID.</p>
+          </div>
+        </a>
+
+        <!-- Chip cloud -->
+        <div class="m-flat justify-between" style="background:var(--lilac)">
+          <div class="m-flat-body">
+            <div class="chips">
+              <a class="chip" href="#">Transportation</a>
+              <a class="chip" href="#">Food</a>
+              <a class="chip" href="#">Healthcare</a>
+              <a class="chip" href="#">Academics</a>
+              <a class="chip" href="#">Scholarships</a>
+            </div>
+          </div>
+          <a class="m-row" href="../resources.html" style="border-top:2px solid var(--ink)">
+            <span>Browse every section</span>
+            <span class="circ" aria-hidden="true">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M3 14L14 3M14 3H6M14 3v8"
+                stroke="#1E2470" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ---------------------- The rail ---------------------- -->
+      <aside class="rail">
+        <div>
+          <h3 class="h3 rule-head mb-5">Featured</h3>
+          <div class="grid gap-4">
+            <a class="rail-item" href="#">
+              <span class="duo tone-mint rail-thumb"><img src="../assets/img/market.jpg" alt="A produce stall at a farmers market"></span>
+              <div>
+                <p class="rail-date">12 September</p>
+                <h4>Where to eat for under ten dollars near every DFW campus</h4>
+              </div>
+            </a>
+            <a class="rail-item" href="#">
+              <span class="duo tone-pink rail-thumb"><img src="../assets/img/campus2.jpg" alt="The dome of a civic museum building"></span>
+              <div>
+                <p class="rail-date">5 September</p>
+                <h4>Every museum in the metroplex you can walk into free</h4>
+              </div>
+            </a>
+            <a class="rail-item" href="#">
+              <span class="duo tone-sun rail-thumb"><img src="../assets/img/library.jpg" alt="Someone reading in a library"></span>
+              <div>
+                <p class="rail-date">28 August</p>
+                <h4>Reading a scholarship deadline properly, and why it matters</h4>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="h3 rule-head mb-3">Closing soon</h3>
+          <a class="dl-item" href="#"><span>City of Arlington summer internship</span><span class="dl-days soon">3 days</span></a>
+          <a class="dl-item" href="#"><span>Terry Foundation scholarship</span><span class="dl-days">9 days</span></a>
+          <a class="dl-item" href="#"><span>UNT emergency aid grant</span><span class="dl-days">21 days</span></a>
+          <a class="dl-item" href="#"><span>Dallas Foundation, first-generation award</span><span class="dl-days">30 days</span></a>
+          <a class="btn btn-plain btn-sm mt-5" href="#">All 23 opportunities</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SECTIONS ===========================
+     Four things to browse. The colour chip on each tile is the same colour
+     that heads that section's page, so the chips work as a key across the
+     whole site rather than as decoration.
+     Phase 3: <SectionTile tone="sun" .../> and <TeamStrip/>
+================================================================= -->
+<section class="py-16 md:py-24">
+  <div class="wrap">
+    <h2 class="h2 mb-3">Where to start</h2>
+    <p class="prose mb-10" style="color:var(--ink-soft)">Four sections, all free to read, none of them behind a form.</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <a class="tile" href="../resources.html">
+        <span class="key mb-4" style="background:var(--sun);width:40px;height:40px;border-radius:12px"></span>
+        <h3 class="h3 mb-2 mt-1">Student resources</h3>
+        <p class="text-sm mb-4" style="color:var(--ink-soft)">Transportation, food, healthcare, wellness and academic help across the metroplex.</p>
+        <span class="meta">48 listings</span>
+      </a>
+      <a class="tile" href="#">
+        <span class="key mb-4" style="background:var(--mint);width:40px;height:40px;border-radius:12px"></span>
+        <h3 class="h3 mb-2 mt-1">Opportunities</h3>
+        <p class="text-sm mb-4" style="color:var(--ink-soft)">Scholarships, internships, part-time jobs and volunteering, sorted by what closes soonest.</p>
+        <span class="meta">23 open now</span>
+      </a>
+      <a class="tile" href="#">
+        <span class="key mb-4" style="background:var(--pink);width:40px;height:40px;border-radius:12px"></span>
+        <h3 class="h3 mb-2 mt-1">Savings + student discounts</h3>
+        <p class="text-sm mb-4" style="color:var(--ink-soft)">Verified discounts, free things to do on a weekend, and the cheap finds worth the drive.</p>
+        <span class="meta">60+ places</span>
+      </a>
+      <a class="tile" href="#">
+        <span class="key mb-4" style="background:var(--lilac);width:40px;height:40px;border-radius:12px"></span>
+        <h3 class="h3 mb-2 mt-1">Small businesses &#9825;</h3>
+        <p class="text-sm mb-4" style="color:var(--ink-soft)">Local owners we love, with their hours, links and whatever they offer students.</p>
+        <span class="meta">14 spotlights</span>
+      </a>
+    </div>
+
+    <!-- The people behind the board -->
+    <div class="card mt-8 p-6 md:p-8 flex flex-wrap items-center gap-x-8 gap-y-5 justify-between">
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-4" style="min-width:0">
+        <div class="flex" aria-hidden="true">
+          <span class="avatar" style="background:var(--sun);">AM</span>
+          <span class="avatar" style="background:var(--mint);margin-left:-13px;">RC</span>
+          <span class="avatar" style="background:var(--pink);margin-left:-13px;">PS</span>
+          <span class="avatar" style="background:var(--lilac);margin-left:-13px;">JT</span>
+          <span class="avatar" style="background:var(--sun);margin-left:-13px;">DL</span>
+          <span class="avatar" style="background:var(--card);margin-left:-13px;font-size:.75rem">+7</span>
+        </div>
+        <div style="min-width:220px;flex:1 1 260px">
+          <h3 class="h3 mb-1">Twelve students keep this board current</h3>
+          <p class="text-sm" style="color:var(--ink-soft)">Amy, Ryan and an ambassador on every DFW campus. One of them is probably in your building.</p>
+        </div>
+      </div>
+      <a class="btn btn-plain btn-sm" href="#">Meet the team</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SMALL BUSINESS SPOTLIGHT ================== -->
+<section class="band band-mint py-16 md:py-24">
+  <div class="wrap grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+    <div class="card duo tone-sun" style="aspect-ratio:3/2;padding:0">
+      <img src="../assets/img/coffee.jpg" alt="Stools along the counter at Ceci’s Coffee">
+    </div>
+    <div>
+      <span class="pill">September spotlight</span>
+      <h2 class="h2 mt-4 mb-4">Ceci&rsquo;s Coffee has been quietly feeding UTA students for nine years</h2>
+      <p class="prose mb-6">
+        Ceci opened three blocks from campus in 2016 and still writes the specials on a chalkboard herself.
+        Students get a dollar off any drink, and if you show up with a laptop after 8pm she&rsquo;ll usually
+        top off your cup for free. We asked her what she wishes students knew.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a class="btn btn-plain" href="#">Read the spotlight</a>
+        <a class="btn btn-ink" href="#">All 14 businesses</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMMUNITY SUBMISSION ====================== -->
+<section id="share" class="band band-pink py-16 md:py-20">
+  <div class="wrap grid lg:grid-cols-[1fr_1.1fr] gap-10 items-center">
+    <div>
+      <h2 class="h2 mb-4">Know something we should share?</h2>
+      <p class="prose">
+        A scholarship your department never advertises, a taco place that takes student IDs,
+        a free clinic your friend swears by. Send it over &mdash; we check every submission and
+        credit you on the listing if you want.
+      </p>
+    </div>
+    <form class="card p-6 md:p-7 grid sm:grid-cols-2 gap-4" action="#" method="post">
+      <div class="sm:col-span-2">
+        <label class="label" for="h-find">What did you find?</label>
+        <input class="input" id="h-find" name="find" placeholder="Name of the scholarship, discount or place">
+      </div>
+      <div>
+        <label class="label" for="h-cat">Which section?</label>
+        <select class="select" id="h-cat" name="category">
+          <option>Student resources</option>
+          <option>Opportunities</option>
+          <option>Savings + discounts</option>
+          <option>Small business</option>
+        </select>
+      </div>
+      <div>
+        <label class="label" for="h-email">Your email</label>
+        <input class="input" id="h-email" name="email" type="email" placeholder="you@school.edu">
+      </div>
+      <div class="sm:col-span-2 flex flex-wrap items-center gap-4">
+        <button class="btn btn-ink" type="submit">Send it in</button>
+        <span class="meta">Or use the <a class="lnk" href="../contact.html#share">longer form</a> if you have links to add.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ========================== NEWSLETTER =========================== -->
+<section class="py-16 md:py-24">
+  <div class="wrap grid lg:grid-cols-[1.1fr_1fr] gap-12 items-start">
+    <div>
+      <h2 class="h2 mb-4">The Fundsy newsletter</h2>
+      <p class="prose mb-6" style="color:var(--ink-soft)">
+        Once a month on LinkedIn: what&rsquo;s closing soon, what&rsquo;s new on the board, and one
+        DFW business worth your money. Roughly a three-minute read.
+      </p>
+      <a class="btn btn-pink" href="#">Read it on LinkedIn</a>
+    </div>
+
+    <div>
+      <div class="flex items-end justify-between gap-4 mb-4">
+        <h3 class="h3">@fundsy on Instagram</h3>
+        <a class="lnk text-sm" href="#">Follow along</a>
+      </div>
+      <div class="grid grid-cols-3 gap-3">
+        <a class="ig duo tone-pink" href="#"><img src="../assets/img/ig1.jpg" alt="A Fundsy Instagram post"></a>
+        <a class="ig duo tone-sun" href="#"><img src="../assets/img/ig2.jpg" alt="A Fundsy Instagram post"></a>
+        <a class="ig duo tone-mint" href="#"><img src="../assets/img/ig3.jpg" alt="A Fundsy Instagram post"></a>
+        <a class="ig duo tone-lilac" href="#"><img src="../assets/img/ig4.jpg" alt="A Fundsy Instagram post"></a>
+        <a class="ig duo tone-mint" href="#"><img src="../assets/img/ig5.jpg" alt="A Fundsy Instagram post"></a>
+        <a class="ig duo tone-pink" href="#"><img src="../assets/img/ig6.jpg" alt="A Fundsy Instagram post"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================= -->
+<footer class="ftr py-14">
+  <div class="wrap grid md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+    <div>
+      <a class="logo" href="../index.html" style="color:var(--paper)">fundsy<span style="color:var(--pink)">.</span></a>
+      <p class="mt-3 text-sm max-w-xs" style="opacity:.8">
+        A student-run guide to living and studying in Dallas&ndash;Fort Worth for less.
+      </p>
+      <div class="flex gap-3 mt-5">
+        <a class="btn btn-sm btn-sun" href="#" style="box-shadow:none">Instagram</a>
+        <a class="btn btn-sm btn-mint" href="#" style="box-shadow:none">LinkedIn</a>
+      </div>
+    </div>
+    <div>
+      <h3 class="text-sm mb-3" style="font-weight:700">Explore</h3>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a href="../resources.html">Student resources</a></li>
+        <li><a href="#">Opportunities</a></li>
+        <li><a href="#">Savings + discounts</a></li>
+        <li><a href="#">Small businesses</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-sm mb-3" style="font-weight:700">Fundsy</h3>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Our team</a></li>
+        <li><a href="#">Newsletter</a></li>
+        <li><a href="#">Become an ambassador</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="text-sm mb-3" style="font-weight:700">Get in touch</h3>
+      <ul class="text-sm space-y-2" style="list-style:none;padding:0;margin:0">
+        <li><a href="../contact.html">Contact us</a></li>
+        <li><a href="../contact.html#share">Share a find</a></li>
+        <li><a href="../contact.html#resume">Resume help</a></li>
+        <li><a href="../contact.html#partner">Partner with us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap mt-12 pt-6 text-sm" style="border-top:1px solid rgba(240,238,249,.22);opacity:.7">
+    &copy; 2026 Fundsy. Built by students in Dallas&ndash;Fort Worth.
+  </div>
+</footer>
+
+<script src="../fundsy.js"></script>
+</body>
+</html>
