@@ -1,0 +1,70 @@
+/* Quiet pastel — the chosen direction.
+   Ported from wireframes/theme-p6.css.
+   The deliberate version of the look in the screenshot: no card outlines, no
+   shadows, a clean grotesque headline, and a lot of air — with the pastel
+   fills doing the colour work instead of borders. Where the outlined themes
+   separate things with a line, this one separates them with space.
+   Borders survive only where they carry meaning: form fields, and the one
+   accent button. */
+:root{
+  --paper:#FFFFFF;  --paper-deep:#F7F4FB;  --card:#FFFFFF;
+  --ink:#0D0D10;
+  --ink-soft:rgba(13,13,16,.6);
+  --ink-hair:rgba(13,13,16,.12);
+  --pink:#FFC9DC;   --sun:#FFE6A3;   --mint:#A9E3CC;   --lilac:#C0CCF9;
+  --signal:#FF3D8B;
+
+  --font-display:var(--font-archivo),system-ui,sans-serif;
+  --font-body:var(--font-archivo),system-ui,sans-serif;
+  --font-logo:var(--font-archivo),system-ui,sans-serif;
+  --w-logo:800; --logo-size:1.45rem; --logo-ls:-.05em;
+
+  --w-display:700;
+  --ls-display:-.035em;
+  --lh-display:1.0;
+  --display-size:clamp(2.4rem,4.6vw,3.7rem);
+
+  --bw:1px; --bw-thin:1px;
+  --radius:14px; --radius-sm:10px; --notch-r:18px; --pill-radius:999px;
+  --shadow:none; --shadow-sm:none;
+
+  --photo-filter:saturate(.96) contrast(1.02);
+  --photo-blend:normal; --tint-op:0; --halftone-op:0;
+  --scrim-a:rgba(13,13,16,.92); --scrim-b:rgba(13,13,16,.6);
+  --on-scrim:rgba(255,255,255,.87);
+  --topo:none;
+}
+.h2{font-size:clamp(1.7rem,2.9vw,2.4rem);letter-spacing:-.028em}
+.h3{font-size:1.2rem;letter-spacing:-.022em;font-weight:700}
+.rail-item h4{font-size:.9375rem;letter-spacing:-.012em;font-weight:600}
+body{font-weight:400}
+.nav a{font-weight:500}
+.btn,.pill,.chip,.m-row,.dl-item span:first-child{font-weight:600}
+.meta,.rail-date,.pcard-meta{font-weight:400}
+
+/* Outlines off everywhere colour or a photo already does the separating. */
+.card,.note,.m-flat,.tile,.pcard,.snap,.ig,.rail-thumb,.m-flat-a,.m-flat-b{border-color:transparent}
+.card-hair{border-color:var(--ink-hair)}
+.pill{border-color:var(--ink-hair)}
+.chip{border-color:transparent;background:#fff}
+.circ{border-color:var(--ink-hair)}
+.m-row{border-top-color:rgba(13,13,16,.14)}
+/* …but kept where a border is the affordance. */
+.input,.select,.textarea,.drop{border-color:rgba(13,13,16,.28)}
+.hdr{border-bottom-color:var(--ink-hair)}
+.band{border-top-color:transparent;border-bottom-color:transparent}
+.tabs{border-top-color:var(--ink-hair)}
+.tab{border-color:var(--ink-hair);border-top:none}
+
+.btn{border-color:transparent}
+.btn-pink{background:var(--signal);color:var(--ink)}
+.btn-pink:hover{background:var(--ink);color:#fff}
+/* White, not a tint — the tinted bands would swallow it. */
+.btn-plain{background:#fff;box-shadow:inset 0 0 0 1px rgba(13,13,16,.22)}
+.btn-plain:hover{background:var(--paper-deep)}
+.btn:hover,.tile:hover,a.pcard:hover,.ig:hover,.tab:hover{transform:none;box-shadow:none}
+.tile:hover{background:var(--paper-deep)}
+.dl-days{border-color:transparent}
+.dl-days.soon{background:var(--signal)}
+.snap::before,.note::before{display:none}   /* no pins without the paper look */
+.tape{display:none}

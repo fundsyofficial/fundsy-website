@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/* Both sheets are imported INTO a cascade layer on purpose.
+   Tailwind v4 puts its utilities in @layer utilities, and unlayered CSS beats
+   every layered rule regardless of specificity — so importing these plainly
+   made `h1,h2,h3,h4,.display{margin:0}` override every mb-* utility in the
+   markup. The wireframes used the Tailwind v3 CDN, which has no layers, which
+   is why the same CSS behaved differently there. */
+@import "./styles/base.css" layer(components);
+@import "./styles/theme.css" layer(components);
+
+/* Expose the design tokens to Tailwind so utilities like bg-sun and text-ink
+   resolve to the same values the component CSS uses. */
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-pink: var(--pink);
+  --color-sun: var(--sun);
+  --color-mint: var(--mint);
+  --color-lilac: var(--lilac);
+  --color-signal: var(--signal);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
