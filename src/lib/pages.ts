@@ -371,7 +371,7 @@ export type Member = {
 export const FOUNDERS: Member[] = [
   {
     initials: "AM",
-    name: "Amy Morales",
+    name: "Amy Sanchez Ramirez",
     role: "Co-founder",
     school: "UT Arlington",
     major: "Public policy",
@@ -380,7 +380,7 @@ export const FOUNDERS: Member[] = [
   },
   {
     initials: "RC",
-    name: "Ryan Chen",
+    name: "Ryan [surname needed]",
     role: "Co-founder",
     school: "UT Dallas",
     major: "Computer science",
@@ -405,34 +405,52 @@ export const OPEN_CAMPUSES = ["Texas Woman’s University", "UT Southwestern", "
 export type Issue = {
   date: string;
   title: string;
-  summary: string;
-  tone: Tone;
+  href: string;
 };
 
+/* Taken from the public newsletter page, so the titles and links are real.
+   Deliberately no summaries — writing a blurb for an issue nobody here has
+   read would be inventing content and attributing it to Amy. */
 export const ISSUES: Issue[] = [
   {
-    date: "September 2026",
-    title: "Everything closing before the end of term",
-    summary: "Four scholarship deadlines, the Arlington internship, and why the DART semester pass is worth buying in September rather than October.",
-    tone: "mint",
-  },
-  {
     date: "August 2026",
-    title: "The move-in issue",
-    summary: "Furnishing a first apartment for under $200, the weeks when students leave everything on the kerb, and two free-cycle groups worth joining.",
-    tone: "sun",
+    title: "The Fundsy Scoop | August 2026",
+    href: "https://www.linkedin.com/pulse/fundsy-scoop-august-2026-amy-sanchez-ramirez-sfpjc",
   },
   {
     date: "July 2026",
-    title: "Working over summer without a car",
-    summary: "Which jobs are actually reachable on DART, the TRE timetable that makes Fort Worth possible, and one business that reimburses transit.",
-    tone: "pink",
+    title: "The Fundsy Scoop | July 2026",
+    href: "https://www.linkedin.com/pulse/fundsy-scoop-july-2026-amy-sanchez-ramirez-1yc4c",
   },
   {
-    date: "June 2026",
-    title: "Free food, all summer",
-    summary: "Pantries that stay open between terms, community fridges, and the campus that quietly runs a free lunch through August.",
-    tone: "lilac",
+    date: "May 2026",
+    title: "Fundsy Newsletter — Eighth Edition",
+    href: "https://www.linkedin.com/pulse/fundsy-newsletter-eighth-edition-may-2026-amy-sanchez-ramirez-8hdcf",
+  },
+  {
+    date: "April 2026",
+    title: "Fundsy Newsletter — Seventh Edition",
+    href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-seventh-edition-april-2026-amy-sanchez-ramirez-e1igc",
+  },
+  {
+    date: "March 2026",
+    title: "Fundsy Newsletter — Sixth Edition",
+    href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-sixth-edition-march-2026-amy-sanchez-ramirez-tdjdc",
+  },
+  {
+    date: "February 2026",
+    title: "Fundsy Newsletter — Fifth Edition",
+    href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-fifth-edition-february-2026-amy-sanchez-ramirez-hlkyc",
+  },
+  {
+    date: "January 2026",
+    title: "Fundsy Newsletter — Fourth Edition",
+    href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-fourth-edition-january-2026-amy-sanchez-ramirez-y5cbc",
+  },
+  {
+    date: "December 2025",
+    title: "Fundsy Newsletter — Third Edition",
+    href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-third-edition-december-2025-amy-sanchez-ramirez-dxvbe",
   },
 ];
 

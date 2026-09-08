@@ -115,6 +115,49 @@ can never be silently dropped. Wiring them up is Phase 4:
 The consent checkbox and the "deleted once we've sent you notes" line on the resume form
 are promises the backend has to actually keep.
 
+## Instagram and the newsletter
+
+The site links to the real accounts: [@fundsyofficial](https://www.instagram.com/fundsyofficial/)
+and **The Fundsy Scoop** on LinkedIn. The newsletter page lists every real edition, with
+links straight through to LinkedIn.
+
+### Instagram posts need a token — there is no way around it
+
+The homepage grid shows the six most recent posts **once `INSTAGRAM_ACCESS_TOKEN` is
+set**. Until then it falls back to placeholder tiles that link to the profile, so the
+layout never has a hole in it.
+
+It cannot work without a token, and that is worth understanding before anyone spends time
+on it:
+
+- The public profile page returns 200 and its meta tags carry the follower and post
+  counts, but **the HTML contains no posts at all** — Instagram renders them client-side
+  behind an auth check.
+- The old public oEmbed endpoint now redirects, and Instagram Basic Display was shut
+  down in 2024.
+- Scraping is not a shortcut worth taking. It breaks Instagram's terms, the media URLs
+  are short-lived signed CDN links that cannot be stored, and the markup changes without
+  notice. This repo deliberately contains no scraper.
+
+**To switch it on:**
+
+1. Make @fundsyofficial a Professional account (Business or Creator) in the Instagram app
+   — Settings → Account type.
+2. Create a Meta app at developers.facebook.com and add the **Instagram** product.
+3. Generate a long-lived user access token with the `instagram_business_basic` scope.
+4. Put it in `.env.local` as `INSTAGRAM_ACCESS_TOKEN`, and in Vercel's environment
+   variables for production.
+
+Long-lived tokens last 60 days and need refreshing, so this eventually wants a scheduled
+refresh. `src/lib/instagram.ts` fetches on an hourly revalidate and returns `null` on any
+failure, so an expired token degrades to the fallback rather than breaking the page.
+
+### The newsletter
+
+`ISSUES` in `src/lib/pages.ts` is a hand-maintained list of editions read off the public
+newsletter page — real titles, real links, no invented summaries. Add a row when a new
+edition goes out. LinkedIn has no public API for this.
+
 ## ⚠ Photography
 
 The images in `public/assets/img/` are **placeholders from a stock placeholder service

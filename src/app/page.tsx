@@ -11,12 +11,12 @@ import {
   HERO,
   HOME_DEADLINES,
   HOME_FEATURED,
-  INSTAGRAM,
   MOSAIC,
   SECTION_TILES,
   TEAM_INITIALS,
 } from "@/lib/content";
-import { SOCIALS } from "@/lib/site";
+import InstagramGrid from "@/components/InstagramGrid";
+import { NEWSLETTER, SOCIALS } from "@/lib/site";
 
 export default function Home() {
   return (
@@ -183,25 +183,26 @@ export default function Home() {
       <section className="py-16 md:py-24">
         <div className="wrap grid lg:grid-cols-[1.1fr_1fr] gap-12 items-start">
           <div>
-            <h2 className="h2 mb-4">The Fundsy newsletter</h2>
+            <h2 className="h2 mb-4">{NEWSLETTER.name}</h2>
             <p className="prose mb-6" style={{ color: "var(--ink-soft)" }}>
-              Once a month on LinkedIn: what&rsquo;s closing soon, what&rsquo;s new on the board,
-              and one DFW business worth your money. Roughly a three-minute read.
+              {NEWSLETTER.tagline} Once a month on LinkedIn: what&rsquo;s closing soon,
+              what&rsquo;s new on the board, and one DFW business worth your money.
             </p>
-            <a className="btn btn-pink" href={SOCIALS.linkedin}>Read it on LinkedIn</a>
+            <div className="flex flex-wrap gap-3">
+              <a className="btn btn-pink" href={NEWSLETTER.url} target="_blank" rel="noreferrer">
+                Read it on LinkedIn
+              </a>
+              <Link className="btn btn-plain" href="/newsletter">Every edition</Link>
+            </div>
           </div>
           <div>
             <div className="flex items-end justify-between gap-4 mb-4">
-              <h3 className="h3">@fundsy on Instagram</h3>
-              <a className="lnk text-sm" href={SOCIALS.instagram}>Follow along</a>
+              <h3 className="h3">{SOCIALS.instagramHandle}</h3>
+              <a className="lnk text-sm" href={SOCIALS.instagram} target="_blank" rel="noreferrer">
+                Follow along
+              </a>
             </div>
-            <div className="grid grid-cols-3 gap-3">
-              {INSTAGRAM.map((p) => (
-                <a className="ig" key={p.src} href={SOCIALS.instagram} style={{ position: "relative", overflow: "hidden" }}>
-                  <Photo src={p.src} alt="A Fundsy Instagram post" tone={p.tone} style={{ position: "absolute", inset: 0 }} sizes="(max-width: 640px) 30vw, 180px" />
-                </a>
-              ))}
-            </div>
+            <InstagramGrid />
           </div>
         </div>
       </section>

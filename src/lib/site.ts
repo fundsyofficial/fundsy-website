@@ -60,7 +60,16 @@ export const FOOTER = [
 ] as const;
 
 export const SOCIALS = {
-  instagram: "https://instagram.com/fundsy",
-  linkedin: "https://linkedin.com/company/fundsy",
+  instagram: "https://www.instagram.com/fundsyofficial/",
+  instagramHandle: "@fundsyofficial",
+  /* "The Fundsy Scoop" — the LinkedIn newsletter, published monthly. */
+  linkedin: "https://www.linkedin.com/newsletters/the-fundsy-scoop-7381391806833360897/",
   email: "hello@fundsy.org",
+} as const;
+
+export const NEWSLETTER = {
+  name: "The Fundsy Scoop",
+  tagline: "Fresh scholarships, deadlines, and money tips for students.",
+  cadence: "Published monthly on LinkedIn",
+  url: SOCIALS.linkedin,
 } as const;
