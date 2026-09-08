@@ -137,6 +137,11 @@ than relying on a filter in application code that someone could forget. Verified
 the running database: anon sees only published rows, a signed-in non-editor also sees only
 published rows and cannot write at all, and an editor sees everything.
 
+If the database is unreachable, a post page raises an error rather than returning a 404 —
+a live post 404-ing because Postgres blinked would get cached, and read as permanently
+gone. The blog index degrades to its empty state instead, which is the right trade for a
+list.
+
 Post bodies are Markdown, rendered with react-markdown. Raw HTML is not enabled and
 nothing goes through `dangerouslySetInnerHTML`, so a post cannot inject script into the
 page even if an editor account were compromised.

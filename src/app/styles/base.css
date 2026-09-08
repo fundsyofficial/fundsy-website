@@ -346,7 +346,10 @@ a.pcard:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
 .post-body h2{font-size:1.6rem;margin:2.2rem 0 .7rem}
 .post-body h3{font-size:1.25rem;margin:1.8rem 0 .5rem}
 .post-body p{margin:0 0 1.1rem;line-height:1.7}
-.post-body ul,.post-body ol{margin:0 0 1.2rem;padding-left:1.3rem}
+/* Tailwind's reset strips list markers; a written post wants them back. */
+.post-body ul{list-style:disc;margin:0 0 1.2rem;padding-left:1.35rem}
+.post-body ol{list-style:decimal;margin:0 0 1.2rem;padding-left:1.35rem}
+.post-body li::marker{color:var(--ink-soft)}
 .post-body li{margin-bottom:.45rem;line-height:1.65}
 .post-body a{font-weight:600;text-decoration:underline;text-decoration-thickness:2px;
   text-underline-offset:3px;text-decoration-color:var(--signal)}
