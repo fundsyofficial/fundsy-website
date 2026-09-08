@@ -5,12 +5,17 @@ college students in Dallas–Fort Worth actually use.
 
 ## Running it
 
+You need Docker running for the database.
+
 ```bash
 npm install
+cp .env.example .env.local
+npm run db:start      # starts local Supabase, prints the keys
 npm run dev
 ```
 
-Then open http://localhost:3000.
+Put the values `db:start` prints into `.env.local` — Project URL, the anon key,
+and the service role key. Then open http://localhost:3000.
 
 | Command | |
 | --- | --- |
@@ -18,6 +23,12 @@ Then open http://localhost:3000.
 | `npm run build` | Production build |
 | `npm start` | Serve the production build |
 | `npm run lint` | ESLint |
+| `npm run db:start` | Start local Supabase |
+| `npm run db:stop` | Stop it |
+| `npm run db:reset` | Wipe and re-apply migrations |
+| `npm run db:studio` | Open Supabase Studio (127.0.0.1:54323) |
+
+Submissions land in the local database — read them in Studio.
 
 ## Where things are
 
@@ -75,7 +86,7 @@ cheaply as a border-weight or background difference on interactive cards.
 | 1 — Wireframes | Done. `wireframes/` |
 | 2 — Next.js + Tailwind | Done |
 | 3 — Component migration | Done for Home, Student resources, Contact |
-| 4 — Forms + Supabase | **Not started.** Forms render but do not submit |
+| 4 — Forms + Supabase | Done against **local** Supabase. Not linked to a hosted project |
 | 5 — Vercel | **Not started** |
 
 Six routes are honest placeholders — About, Opportunities, Savings, Small businesses,
