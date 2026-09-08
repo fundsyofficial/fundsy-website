@@ -165,8 +165,6 @@ img{max-width:100%;display:block}
 .select{appearance:none;background-image:var(--select-arrow);
   background-repeat:no-repeat;background-position:right 14px center;padding-right:40px}
 .input::placeholder,.textarea::placeholder{color:rgba(30,36,112,.42)}
-.drop{position:relative;border:2px dashed var(--ink);border-radius:var(--radius);background:var(--card);padding:30px 22px;text-align:center;cursor:pointer;display:block}
-.drop:hover{background:var(--paper)}
 .seg{display:flex;flex-wrap:wrap;gap:8px}
 .seg button{font:inherit;font-size:.875rem;font-weight:600;padding:10px 16px;border:var(--bw) solid var(--ink);
   border-radius:var(--pill-radius);background:var(--card);color:var(--ink);cursor:pointer}

@@ -46,7 +46,9 @@ body{font-weight:400}
 .card,.note,.m-flat,.tile,.pcard,.snap,.ig,.rail-thumb,.m-flat-a,.m-flat-b{border-color:transparent}
 .card-hair{border-color:var(--ink-hair)}
 .pill{border-color:var(--ink-hair)}
-.chip{border-color:transparent;background:#fff}
+.chip{border-color:transparent;background:var(--paper-deep)}
+/* …except inside a tinted cell, where white is the contrast. */
+.m-flat .chip{background:#fff}
 .circ{border-color:var(--ink-hair)}
 .m-row{border-top-color:rgba(13,13,16,.14)}
 /* …but kept where a border is the affordance. */

@@ -41,25 +41,4 @@ export const partnershipSchema = z.object({
   message: optional,
 });
 
-export const MAX_RESUME_BYTES = 10 * 1024 * 1024;
-export const RESUME_TYPES = [
-  "application/pdf",
-  "application/msword",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-];
-
-export const resumeSchema = z.object({
-  name: required("Your name"),
-  email,
-  school: required("Your school"),
-  year: required("Your year"),
-  goal: optional,
-  /* The checkbox is not a formality. Without it we have no permission to store
-     the file, and the database rejects the row anyway. */
-  consent: z.preprocess(
-    truthyCheckbox,
-    z.literal(true, { message: "We can only store your file if you tick the consent box." }),
-  ),
-});
-
 export type FieldErrors = Record<string, string[]>;

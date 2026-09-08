@@ -69,59 +69,19 @@ create table public.partnership_requests (
 );
 
 
--- Resume reviews -------------------------------------------------------------
--- resume_path points into the private 'resumes' storage bucket. The file itself
--- is never public; the team fetches it with a short-lived signed URL.
-create table public.resume_reviews (
-  id           uuid primary key default gen_random_uuid(),
-  created_at   timestamptz not null default now(),
-  name         text not null,
-  email        text not null,
-  school       text not null,
-  year         text not null,
-  goal         text,
-  consent      boolean not null,
-  resume_path  text,
-  status       public.submission_status not null default 'new',
-
-  -- The form promises we only store the file with permission. Enforce it here
-  -- so a future code path cannot quietly break that promise.
-  constraint resume_requires_consent check (consent = true)
-);
-
-comment on column public.resume_reviews.resume_path is
-  'Object path inside the private "resumes" bucket. Delete the object once notes are sent — the form promises the student we will.';
-
-
 -- Newest first is how every one of these is read.
 create index finds_created_at_idx                on public.finds (created_at desc);
 create index questions_created_at_idx            on public.questions (created_at desc);
 create index partnership_requests_created_at_idx on public.partnership_requests (created_at desc);
-create index resume_reviews_created_at_idx       on public.resume_reviews (created_at desc);
 
 
 -- RLS on, no policies. See the note at the top of this file.
 alter table public.finds                enable row level security;
 alter table public.questions            enable row level security;
 alter table public.partnership_requests enable row level security;
-alter table public.resume_reviews       enable row level security;
 
-
--- Private bucket for resumes. 10 MB matches what the form tells students, and
--- the mime allowlist means a PDF upload endpoint cannot be used to host
--- arbitrary files.
-insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values (
-  'resumes',
-  'resumes',
-  false,
-  10485760,
-  array[
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-  ]
-);
-
--- No storage policies either: uploads go through a server action holding the
--- service role key, so the browser never touches this bucket directly.
+-- Resume reviews are handled over email for now: students send a PDF to
+-- hello@fundsy.org and the team replies there. That was a deliberate call —
+-- an upload endpoint means a private bucket, a consent record and a promise to
+-- delete files, all to do something an inbox already does. If it comes back,
+-- the original table and bucket are in git at commit 904796a.

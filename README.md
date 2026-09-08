@@ -85,13 +85,22 @@ cheaply as a border-weight or background difference on interactive cards.
 | --- | --- |
 | 1 — Wireframes | Done. `wireframes/` |
 | 2 — Next.js + Tailwind | Done |
-| 3 — Component migration | Done for Home, Student resources, Contact |
+| 3 — Component migration | Done. All nine pages built |
 | 4 — Forms + Supabase | Done against **local** Supabase. Not linked to a hosted project |
 | 5 — Vercel | **Not started** |
 
-Six routes are honest placeholders — About, Opportunities, Savings, Small businesses,
-Our team, Newsletter. They render the real header, nav state and metadata, and say what
-is coming. They follow the `/resources` template; what they need is content, not design.
+All nine pages are built. Student resources, Opportunities and Savings are the same
+`<SectionPage>` component with different data — a banded header, a rail carrying on-page
+nav plus Featured plus deadlines, and categories introduced by a photo card. Categories
+can vary their listing layout (`rows`, `pairs`, `trio`) so a page never reads as one
+repeated shape.
+
+About, Small businesses, Our team and Newsletter have their own layouts, built from the
+same components.
+
+**All copy is placeholder.** The sentences are real sentences so the layouts can be
+judged, and the listings are plausible, but no date, amount or deadline on this site has
+been verified. Everything needs checking by a student before it goes live.
 
 **The contact forms deliberately have no submit handler.** They call
 `preventDefault()` rather than posting to a half-built endpoint, so a student's message

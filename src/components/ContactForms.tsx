@@ -5,9 +5,9 @@ import {
   submitFind,
   submitPartnership,
   submitQuestion,
-  submitResume,
   type ActionState,
 } from "@/app/contact/actions";
+import { SOCIALS } from "@/lib/site";
 import type { FieldErrors } from "@/lib/schemas";
 
 /** One page, four purposes, so nobody has to guess which page their message
@@ -29,7 +29,6 @@ type PanelId = (typeof PANELS)[number]["id"];
 
 export default function ContactForms() {
   const [active, setActive] = useState<PanelId>("share");
-  const [fileName, setFileName] = useState<string | null>(null);
   const headingRefs = useRef<Record<string, HTMLHeadingElement | null>>({});
   const registerHeading = (id: PanelId, el: HTMLHeadingElement | null) => {
     headingRefs.current[id] = el;
@@ -193,63 +192,49 @@ export default function ContactForms() {
         <Submit label="Send partnership request" note="Amy handles partnerships and replies personally." />
       </Panel>
 
-      <Panel id="resume" action={submitResume} active={active} registerHeading={registerHeading} title="Send us your resume"
-        blurb="Upload it and one of us will read it properly and write back with notes — what’s working, what to cut, and how to describe the job you actually did. It’s free, it takes us about a week, and only the Fundsy team sees your file.">
-        <div>
-          <label className="label" htmlFor="r-name">Your name</label>
-          <input className="input" id="r-name" name="name" placeholder="First and last" />
-          <FieldError name="name" />
+      <Panel
+        id="resume"
+        active={active}
+        registerHeading={registerHeading}
+        title="Send us your resume"
+        blurb="One of us will read it properly and write back with notes — what’s working, what to cut, and how to describe the job you actually did. It’s free and it takes us about a week."
+      >
+        <div className="note note-sun">
+          <p className="text-[.9375rem] mb-1" style={{ fontWeight: 600 }}>
+            Email it to <a className="lnk" href={`mailto:${SOCIALS.email}?subject=Resume%20review`}>{SOCIALS.email}</a>
+          </p>
+          <p className="text-[.9375rem]">
+            PDF or Word, either is fine. Only Amy and Ryan see it.
+          </p>
         </div>
-        <div>
-          <label className="label" htmlFor="r-email">Your email</label>
-          <input className="input" id="r-email" name="email" type="email" placeholder="you@school.edu" />
-          <FieldError name="email" />
+
+        <div className="mt-7">
+          <h3 className="h3 mb-3">Worth putting in the email</h3>
+          <ul className="grid gap-3" style={{ listStyle: "none", padding: 0, margin: 0 }}>
+            <li className="card-hair p-5 text-[.9375rem]">
+              What you&rsquo;re applying for — a specific role, an industry, or just
+              &ldquo;anything paid this summer&rdquo;. All three are useful to know.
+            </li>
+            <li className="card-hair p-5 text-[.9375rem]">
+              Your school and year, so the advice matches where you actually are.
+            </li>
+            <li className="card-hair p-5 text-[.9375rem]">
+              A job posting you&rsquo;re aiming at, if you have one. Notes are much sharper
+              against a real listing than in the abstract.
+            </li>
+          </ul>
+          <p className="meta mt-5">
+            Reviews go out on Sundays. If you haven&rsquo;t heard back in two weeks, send it again &mdash;
+            it means we lost it, not that we&rsquo;re ignoring you.
+          </p>
         </div>
-        <div>
-          <label className="label" htmlFor="r-school">School</label>
-          <input className="input" id="r-school" name="school" placeholder="UT Dallas" />
-          <FieldError name="school" />
-        </div>
-        <div>
-          <label className="label" htmlFor="r-year">Year</label>
-          <select className="select" id="r-year" name="year" defaultValue="First year">
-            <option>First year</option><option>Sophomore</option><option>Junior</option>
-            <option>Senior</option><option>Graduate student</option><option>Recent graduate</option>
-          </select>
-          <FieldError name="year" />
-        </div>
-        <div className="sm:col-span-2">
-          <span className="label">Your resume</span>
-          <label className="drop" htmlFor="r-file">
-            <span className="h3" style={{ display: "block", marginBottom: 6 }}>Choose a file, or drop it here</span>
-            <span className="meta">{fileName ? `${fileName} — ready to send` : "PDF or Word, up to 10 MB"}</span>
-            <input
-              type="file"
-              id="r-file"
-              name="resume"
-              accept=".pdf,.doc,.docx"
-              onChange={(e) => setFileName(e.target.files?.[0]?.name ?? null)}
-              style={{ position: "absolute", width: 1, height: 1, opacity: 0, pointerEvents: "none" }}
-            />
-          </label>
-          <FieldError name="resume" />
-          <p className="hint">Files are stored privately and deleted once we&rsquo;ve sent you notes.</p>
-        </div>
-        <div className="sm:col-span-2">
-          <label className="label" htmlFor="r-goal">What are you applying for?</label>
-          <textarea className="textarea" id="r-goal" name="goal" style={{ minHeight: 110 }}
-            placeholder="A specific role, an industry, or just ‘anything paid this summer’ — all useful to know." />
-          <FieldError name="goal" />
-        </div>
-        <div className="sm:col-span-2">
-          <label className="check"><input type="checkbox" name="consent" /><span>I&rsquo;m okay with the Fundsy team reading and storing this file until my review is done.</span></label>
-          <FieldError name="consent" />
-        </div>
-        <Submit label="Send my resume" note="Reviews go out on Sundays." />
       </Panel>
     </div>
   );
 }
+
+/* useActionState needs an action even when the panel has no form. */
+const noopAction = async (): Promise<ActionState> => null;
 
 function Panel({
   id, active, registerHeading, title, blurb, action, children,
@@ -259,10 +244,11 @@ function Panel({
   registerHeading: (id: PanelId, el: HTMLHeadingElement | null) => void;
   title: string;
   blurb: string;
-  action: (prev: ActionState, formData: FormData) => Promise<ActionState>;
+  /* Omit to render a panel that is information rather than a form. */
+  action?: (prev: ActionState, formData: FormData) => Promise<ActionState>;
   children: React.ReactNode;
 }) {
-  const [state, formAction, pending] = useActionState(action, null);
+  const [state, formAction, pending] = useActionState(action ?? noopAction, null);
   const formRef = useRef<HTMLFormElement>(null);
   const submitted = useRef<FormData | null>(null);
 
@@ -299,7 +285,12 @@ function Panel({
         {title}
       </h2>
 
-      {state?.ok ? (
+      {!action ? (
+        <>
+          <p className="prose mb-8" style={{ color: "var(--ink-soft)" }}>{blurb}</p>
+          {children}
+        </>
+      ) : state?.ok ? (
         /* On success the form is replaced rather than reset, so nobody sends
            the same thing twice wondering whether it went through. */
         <div className="note note-mint" role="status">
