@@ -9,6 +9,10 @@
 -- Writes require an authenticated session. Anyone who can sign in can edit, so
 -- keep the allowed-emails list short — see public.is_editor below.
 
+-- gen_random_uuid() below needs this. It used to be declared by the
+-- submissions migration, which no longer exists.
+create extension if not exists "pgcrypto";
+
 create table public.posts (
   id            uuid primary key default gen_random_uuid(),
   created_at    timestamptz not null default now(),

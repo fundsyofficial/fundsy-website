@@ -195,14 +195,14 @@ export default async function Home() {
           </div>
           <div className="card p-6 md:p-7">
             <p className="prose mb-5" style={{ color: "var(--ink-soft)" }}>
-              The form has room for links, deadlines and who qualifies, so it lands with
-              everything we need to check it. Emailing it works too.
+              Email it to us and we&rsquo;ll check it. There&rsquo;s a template on the contact
+              page so you don&rsquo;t have to guess what we need.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link className="btn btn-ink" href="/contact#share">Share a find</Link>
-              <a className="btn btn-plain" href={`mailto:${SOCIALS.email}?subject=A%20find%20for%20Fundsy`}>
-                Email it instead
+              <a className="btn btn-ink" href={`mailto:${SOCIALS.email}?subject=A%20find%20for%20Fundsy`}>
+                Email us a find
               </a>
+              <Link className="btn btn-plain" href="/contact#share">What to include</Link>
             </div>
           </div>
         </div>

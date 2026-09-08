@@ -14,8 +14,9 @@ npm run db:start      # starts local Supabase, prints the keys
 npm run dev
 ```
 
-Put the values `db:start` prints into `.env.local` — Project URL, the anon key,
-and the service role key. Then open http://localhost:3000.
+Put the values `db:start` prints into `.env.local` — the Project URL and the anon key.
+The service role key is only needed by `npm run db:editors`; the app itself never reads
+it. Then open http://localhost:3000.
 
 | Command | |
 | --- | --- |
@@ -29,7 +30,7 @@ and the service role key. Then open http://localhost:3000.
 | `npm run db:studio` | Open Supabase Studio (127.0.0.1:54323) |
 | `npm run db:editors` | Recreate the local editor accounts after a reset |
 
-Submissions land in the local database — read them in Studio.
+The database holds posts and nothing else. Nothing a visitor does writes to it.
 
 ## Where things are
 
@@ -38,7 +39,9 @@ src/app/          routes — one folder per page
 src/app/styles/   base.css (structure) + theme.css (skin)
 src/components/   the design system
 src/lib/site.ts   navigation, section colours, socials
-src/lib/content.ts  placeholder editorial content — becomes Supabase in Phase 4
+src/lib/content.ts  placeholder editorial content (homepage, resources)
+src/lib/pages.ts    placeholder editorial content (the other sections)
+src/lib/posts.ts    posts, read from Supabase
 public/assets/img   placeholder photography (see the warning below)
 wireframes/       the Phase 1 static HTML, kept for reference
 ```
@@ -87,7 +90,7 @@ cheaply as a border-weight or background difference on interactive cards.
 | 1 — Wireframes | Done. `wireframes/` |
 | 2 — Next.js + Tailwind | Done |
 | 3 — Component migration | Done. All nine pages built |
-| 4 — Forms + Supabase | Done against **local** Supabase. Not linked to a hosted project |
+| 4 — Forms | Dropped. Everything is email; see below |
 | Posts / CMS | Done. `/admin`, magic-link sign-in, drafts, Markdown |
 | 5 — Vercel | **Not started** |
 
@@ -112,29 +115,39 @@ prefilled subject line, which costs nothing and makes the inbox sortable. None o
 three has a form or a database row, because those conversations belong somewhere a person
 actually reads.
 
-**One form survives: Share a find.** It stayed because the structure is the point. Which
-section it belongs in, the link, the deadline — those come back inconsistently when people
-write them in prose. It validates on the server, reports errors per field, keeps what was
-typed when a submission is rejected, and offers "email it instead" beside the submit
-button.
+**There are no forms on the public site at all.** "Share a find" is an email too — the
+button prefills a subject and a body template (what it is, where, a link, how it works,
+the deadline), so people don't have to guess what's useful and we don't have to parse
+prose.
 
-Earlier versions had four forms and a resume upload. The upload went first — a private
-bucket, a consent record and a deletion promise, all to do something an inbox already does
-— and the two conversational forms followed. Both are in git if either is ever wanted
-back: the upload at `904796a`, the forms at `9b7abf5`.
+That template is the old form's fields, moved into the email body. The same information
+arrives, in a place someone actually reads.
 
-### The database
+### Why the forms went
 
-`supabase/migrations/20260907000000_submissions.sql` creates one table, `finds`.
+They worked. The problem was where the submissions landed: a Postgres table nobody was
+notified about. A find would sit there until someone remembered to open Supabase Studio,
+which is not a workflow — it's a way to lose things quietly. Wiring up email forwarding
+would have fixed the symptom while keeping a database, a service-role key and a spam
+surface, all to deliver a message to an inbox.
 
-**Read the security note at the top of that file before changing any policy.** Short
-version: RLS is on and `anon` has no policy at all. That table holds students' email
-addresses, and the anon key ships to the browser — any `anon` SELECT policy would publish
-every submission to anyone who opened devtools. The write goes through a server action
-using the service role key, which never leaves the server.
+The whole path went in stages, and each one is in git if it's ever wanted back:
 
-Verified against the running database rather than assumed: `anon` cannot read a row,
-`anon` cannot insert, and the service role can do both.
+| | |
+| --- | --- |
+| Resume upload — private bucket, consent record, deletion promise | `904796a` |
+| General question and Partner with us forms | `9b7abf5` |
+| Share a find form, `finds` table, zod validation | `f0f2001` |
+
+### What this bought
+
+**The app no longer uses the service-role key.** Nothing under `src/` reads it, and CI
+does not set it. That key bypasses Row Level Security, and it now exists in exactly one
+place: `scripts/create-editors.mjs`, a local development script. **Do not set it in
+Vercel.**
+
+The database is down to one table, `posts`, which holds nothing private. No student email
+address is stored anywhere any more.
 
 ### Linking a hosted project
 
@@ -143,22 +156,12 @@ supabase link --project-ref <ref>
 supabase db push
 ```
 
-Then set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` and
-`SUPABASE_SERVICE_ROLE_KEY` in Vercel. The service role key must **not** get a
-`NEXT_PUBLIC_` prefix.
+Then set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in Vercel. Those
+two are all the app needs.
 
 Also paste `supabase/templates/magic_link.html` into Authentication → Email Templates, and
 add the production URL to the redirect allow-list, or admin sign-in links will point at
 localhost.
-
-### Still open
-
-- Nobody is notified when a find is submitted. It sits in the table until someone opens
-  Studio. A database webhook forwarding to `fundsy.official@gmail.com` would close the last
-  gap between the form and the inbox.
-- No spam protection. A public form with no rate limit will eventually be found.
-- No admin view for finds — reading them means opening Studio. Fine for two people, and it
-  will not stay fine. Email needs none of this, which is part of why it won.
 
 ## Writing posts
 

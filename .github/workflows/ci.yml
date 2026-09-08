@@ -43,3 +43,4 @@ jobs:
           # this step fails and that is the signal to fix it.
           NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key
+          # No service-role key here, deliberately. The app does not use one.
