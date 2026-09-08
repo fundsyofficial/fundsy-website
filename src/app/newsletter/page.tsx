@@ -37,14 +37,19 @@ export default function NewsletterPage() {
         <div className="grid gap-4 mt-8">
           {ISSUES.map((i) => (
             <a
-              className="card-hair p-6 md:p-7 grid md:grid-cols-[170px_1fr] gap-4 md:gap-8 items-baseline"
+              className="card-hair p-6 md:p-7 grid md:grid-cols-[170px_1fr] gap-4 md:gap-8 items-start"
               key={i.href}
               href={i.href}
               target="_blank"
               rel="noreferrer"
             >
               <p className="meta">{i.date}</p>
-              <h3 className="h3">{i.title}</h3>
+              <div>
+                <h3 className="h3 mb-2">{i.title}</h3>
+                {i.excerpt && (
+                  <p className="text-[.9375rem]" style={{ color: "var(--ink-soft)" }}>{i.excerpt}</p>
+                )}
+              </div>
             </a>
           ))}
         </div>

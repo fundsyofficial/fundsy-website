@@ -406,51 +406,69 @@ export type Issue = {
   date: string;
   title: string;
   href: string;
+  /* The issue's own opening line, taken from its LinkedIn preview text.
+     Amy's words, not a summary written here. */
+  excerpt?: string;
 };
 
-/* Taken from the public newsletter page, so the titles and links are real.
-   Deliberately no summaries — writing a blurb for an issue nobody here has
-   read would be inventing content and attributing it to Amy. */
+/* Titles, links and excerpts all come from the newsletter's own public pages,
+   so every word here is Amy's. Nothing is summarised or paraphrased. */
 export const ISSUES: Issue[] = [
   {
     date: "August 2026",
     title: "The Fundsy Scoop | August 2026",
     href: "https://www.linkedin.com/pulse/fundsy-scoop-august-2026-amy-sanchez-ramirez-sfpjc",
+    excerpt:
+      "school is basically back… gulp (ᵕ—ᴗ—)",
   },
   {
     date: "July 2026",
     title: "The Fundsy Scoop | July 2026",
     href: "https://www.linkedin.com/pulse/fundsy-scoop-july-2026-amy-sanchez-ramirez-1yc4c",
+    excerpt:
+      "Wrapping up July and getting ready for a new semester. Helping college students find scholarships, internships, campus jobs, career resources, and…",
   },
   {
     date: "May 2026",
     title: "Fundsy Newsletter — Eighth Edition",
     href: "https://www.linkedin.com/pulse/fundsy-newsletter-eighth-edition-may-2026-amy-sanchez-ramirez-8hdcf",
+    excerpt:
+      "Welcome back to Fundsy Scoop, your student-built space for scholarships, jobs, and staying on track when things get heavy",
   },
   {
     date: "April 2026",
     title: "Fundsy Newsletter — Seventh Edition",
     href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-seventh-edition-april-2026-amy-sanchez-ramirez-e1igc",
+    excerpt:
+      "Welcome back to Fundsy Scoop, your student-made guide to scholarships, opportunities, and college support",
   },
   {
     date: "March 2026",
     title: "Fundsy Newsletter — Sixth Edition",
     href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-sixth-edition-march-2026-amy-sanchez-ramirez-tdjdc",
+    excerpt:
+      "Welcome back to Fundsy Scoop, a small but growing space where we share scholarships, funding opportunities, and honest guidance for students navigating…",
   },
   {
     date: "February 2026",
     title: "Fundsy Newsletter — Fifth Edition",
     href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-fifth-edition-february-2026-amy-sanchez-ramirez-hlkyc",
+    excerpt:
+      "Welcome back to Fundsy Scoop, a growing space for scholarships, funding opportunities, and honest conversations for students navigating school, money,…",
   },
   {
     date: "January 2026",
     title: "Fundsy Newsletter — Fourth Edition",
     href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-fourth-edition-january-2026-amy-sanchez-ramirez-y5cbc",
+    excerpt:
+      "Welcome back to Fundsy Scoop — a small but growing space for scholarships, funding opportunities, and honest guidance for students figuring things out…",
   },
   {
     date: "December 2025",
     title: "Fundsy Newsletter — Third Edition",
     href: "https://www.linkedin.com/pulse/fundsysmoo-newsletter-third-edition-december-2025-amy-sanchez-ramirez-dxvbe",
+    excerpt:
+      "Welcome back to Fundsy Scoop — your monthly (trying to make bi-weekly) guide for scholarships, on-campus jobs, and career growth at SMU and beyond. …",
   },
 ];
 

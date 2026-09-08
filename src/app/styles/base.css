@@ -340,3 +340,24 @@ a.pcard:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
 .skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:var(--ink);color:var(--paper);
   padding:12px 18px;border-radius:0 0 var(--radius-sm) 0;font-weight:600;text-decoration:none}
 .skip-link:focus{left:0}
+
+/* --- Post body: the only place long-form markdown gets rendered ---------- */
+.post-body{max-width:68ch}
+.post-body h2{font-size:1.6rem;margin:2.2rem 0 .7rem}
+.post-body h3{font-size:1.25rem;margin:1.8rem 0 .5rem}
+.post-body p{margin:0 0 1.1rem;line-height:1.7}
+.post-body ul,.post-body ol{margin:0 0 1.2rem;padding-left:1.3rem}
+.post-body li{margin-bottom:.45rem;line-height:1.65}
+.post-body a{font-weight:600;text-decoration:underline;text-decoration-thickness:2px;
+  text-underline-offset:3px;text-decoration-color:var(--signal)}
+.post-body blockquote{margin:1.6rem 0;padding:14px 20px;border-radius:var(--radius-sm);
+  background:var(--paper-deep)}
+.post-body blockquote p:last-child{margin-bottom:0}
+.post-body code{background:var(--paper-deep);padding:2px 6px;border-radius:5px;font-size:.9em}
+.post-body pre{background:var(--paper-deep);padding:16px;border-radius:var(--radius-sm);
+  overflow-x:auto;margin:0 0 1.2rem}
+.post-body pre code{background:none;padding:0}
+.post-body img{border-radius:var(--radius-sm);margin:1.4rem 0}
+.post-body hr{border:none;border-top:1px solid var(--ink-hair);margin:2rem 0}
+.post-body table{width:100%;border-collapse:collapse;margin:0 0 1.4rem;font-size:.9375rem}
+.post-body th,.post-body td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--ink-hair)}

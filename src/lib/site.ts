@@ -8,6 +8,7 @@ export type Tone = "sun" | "mint" | "pink" | "lilac" | "ink";
 export const NAV = [
   { href: "/about", label: "About" },
   { href: "/resources", label: "Resources" },
+  { href: "/blog", label: "What\u2019s new" },
   { href: "/opportunities", label: "Opportunities" },
   { href: "/savings", label: "Savings" },
   { href: "/small-businesses", label: "Small businesses ♡" },
@@ -21,6 +22,7 @@ export const NAV_MOBILE = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Fundsy" },
   { href: "/resources", label: "Student resources" },
+  { href: "/blog", label: "What\u2019s new" },
   { href: "/opportunities", label: "Opportunities" },
   { href: "/savings", label: "Savings + student discounts" },
   { href: "/small-businesses", label: "Small businesses ♡" },
@@ -34,9 +36,11 @@ export const FOOTER = [
     heading: "Explore",
     links: [
       { href: "/resources", label: "Student resources" },
+  { href: "/blog", label: "What\u2019s new" },
       { href: "/opportunities", label: "Opportunities" },
       { href: "/savings", label: "Savings + discounts" },
       { href: "/small-businesses", label: "Small businesses" },
+      { href: "/blog", label: "What\u2019s new" },
     ],
   },
   {

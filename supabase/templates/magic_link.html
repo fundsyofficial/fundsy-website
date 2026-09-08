@@ -1,0 +1,13 @@
+<h2>Sign in to Fundsy</h2>
+
+<p>Use the link below to sign in and edit the site. It expires in an hour, and
+it only works once.</p>
+
+<p>
+  <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=magiclink">
+    Sign in to Fundsy
+  </a>
+</p>
+
+<p>If you didn't ask for this, you can ignore it — nobody can sign in without
+opening the link.</p>

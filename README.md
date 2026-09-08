@@ -27,6 +27,7 @@ and the service role key. Then open http://localhost:3000.
 | `npm run db:stop` | Stop it |
 | `npm run db:reset` | Wipe and re-apply migrations |
 | `npm run db:studio` | Open Supabase Studio (127.0.0.1:54323) |
+| `npm run db:editors` | Recreate the local editor accounts after a reset |
 
 Submissions land in the local database — read them in Studio.
 
@@ -87,6 +88,7 @@ cheaply as a border-weight or background difference on interactive cards.
 | 2 — Next.js + Tailwind | Done |
 | 3 — Component migration | Done. All nine pages built |
 | 4 — Forms + Supabase | Done against **local** Supabase. Not linked to a hosted project |
+| Posts / CMS | Done. `/admin`, magic-link sign-in, drafts, Markdown |
 | 5 — Vercel | **Not started** |
 
 All nine pages are built. Student resources, Opportunities and Savings are the same
@@ -114,6 +116,36 @@ can never be silently dropped. Wiring them up is Phase 4:
 
 The consent checkbox and the "deleted once we've sent you notes" line on the resume form
 are promises the backend has to actually keep.
+
+## Writing posts
+
+The site is a blog: Amy and Ryan write posts at **`/admin`** and they appear on
+`/blog`, on the homepage rail, and at `/blog/<slug>` — no deploy, no developer.
+
+Sign-in is a magic link. There are no passwords to lose, and no self-signup: an address
+has to already exist as a user *and* be listed in `public.is_editor()` in
+`supabase/migrations/20260908000000_posts.sql`. Two gates on purpose — being able to sign
+in is not the same as being allowed to write.
+
+Locally, `supabase db reset` wipes the auth users along with everything else, so recreate
+them with `npm run db:editors`, then take the sign-in link out of Mailpit at
+http://127.0.0.1:54324.
+
+**Drafts are genuinely invisible.** Public pages read the database as `anon`, and the RLS
+policy only exposes rows where `published = true` — so an unpublished post 404s rather
+than relying on a filter in application code that someone could forget. Verified against
+the running database: anon sees only published rows, a signed-in non-editor also sees only
+published rows and cannot write at all, and an editor sees everything.
+
+Post bodies are Markdown, rendered with react-markdown. Raw HTML is not enabled and
+nothing goes through `dangerouslySetInnerHTML`, so a post cannot inject script into the
+page even if an editor account were compromised.
+
+### What is not editable yet
+
+Posts are. The category-page listings on Student resources, Opportunities and Savings are
+still in `src/lib/pages.ts` and need a developer. Moving those into the database is the
+obvious next step and would reuse everything the posts table already does.
 
 ## Instagram and the newsletter
 
@@ -154,9 +186,10 @@ failure, so an expired token degrades to the fallback rather than breaking the p
 
 ### The newsletter
 
-`ISSUES` in `src/lib/pages.ts` is a hand-maintained list of editions read off the public
-newsletter page — real titles, real links, no invented summaries. Add a row when a new
-edition goes out. LinkedIn has no public API for this.
+`ISSUES` in `src/lib/pages.ts` is a hand-maintained list of editions. Titles, links and
+excerpts all come from the newsletter's own public pages, so every word shown is Amy's —
+nothing is summarised or paraphrased here. Add a row when a new edition goes out; LinkedIn
+has no public API for this.
 
 ## ⚠ Photography
 

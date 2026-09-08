@@ -16,9 +16,33 @@ import {
   TEAM_INITIALS,
 } from "@/lib/content";
 import InstagramGrid from "@/components/InstagramGrid";
+import type { FeaturedItem } from "@/components/FeaturedRail";
 import { NEWSLETTER, SOCIALS } from "@/lib/site";
+import { getPublishedPosts } from "@/lib/posts";
 
-export default function Home() {
+/* Rebuilt at most once a minute so a newly published post reaches the
+   homepage without waiting for a deploy. */
+export const revalidate = 60;
+
+export default async function Home() {
+  /* Real posts when there are any; the curated list until then, so the rail is
+     never an empty column on a fresh install. */
+  const posts = await getPublishedPosts(3);
+  const featured: FeaturedItem[] =
+    posts.length > 0
+      ? posts.map((p) => ({
+          href: `/blog/${p.slug}`,
+          date: p.published_at
+            ? new Date(p.published_at).toLocaleDateString("en-GB", {
+                day: "numeric", month: "long", year: "numeric" })
+            : "",
+          title: p.title,
+          src: p.cover_image ?? "/assets/img/library.jpg",
+          alt: "",
+          tone: p.tone,
+        }))
+      : HOME_FEATURED;
+
   return (
     <>
       {/* ---- Hero: a flyer, with a board of notes and photos beside it ---- */}
@@ -78,7 +102,7 @@ export default function Home() {
           <div className="grid lg:grid-cols-[minmax(0,1fr)_290px] gap-10 lg:gap-12 items-start">
             <BoardMosaic data={MOSAIC} />
             <FeaturedRail
-              featured={HOME_FEATURED}
+              featured={featured}
               deadlines={HOME_DEADLINES}
               action={{ href: "/opportunities", label: "All 23 opportunities" }}
             />
