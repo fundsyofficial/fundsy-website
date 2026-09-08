@@ -25,20 +25,4 @@ export const findSchema = z.object({
   credit: checkbox,
 });
 
-export const questionSchema = z.object({
-  name: required("Your name"),
-  email,
-  topic: required("A topic"),
-  message: required("A message"),
-});
-
-export const partnershipSchema = z.object({
-  organisation: required("The business or organisation name"),
-  contact_name: required("A name to reply to"),
-  email,
-  website: optional,
-  partner_type: required("A partnership type"),
-  message: optional,
-});
-
 export type FieldErrors = Record<string, string[]>;

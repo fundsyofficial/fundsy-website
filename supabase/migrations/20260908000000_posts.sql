@@ -68,7 +68,7 @@ create trigger posts_touch_updated_at
 create or replace function public.is_editor()
 returns boolean language sql stable as $$
   select coalesce(auth.jwt() ->> 'email', '') in (
-    'hello@fundsy.org',
+    'fundsy.official@gmail.com',
     'amy@fundsy.org',
     'ryan@fundsy.org'
   );

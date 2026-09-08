@@ -18,7 +18,7 @@ if (!url?.includes("127.0.0.1") && !url?.includes("localhost")) {
 }
 
 /* Keep in step with public.is_editor() in the posts migration. */
-for (const email of ["hello@fundsy.org", "amy@fundsy.org", "ryan@fundsy.org"]) {
+for (const email of ["fundsy.official@gmail.com", "amy@fundsy.org", "ryan@fundsy.org"]) {
   const res = await fetch(`${url}/auth/v1/admin/users`, {
     method: "POST",
     headers: { apikey: key, Authorization: `Bearer ${key}`, "Content-Type": "application/json" },

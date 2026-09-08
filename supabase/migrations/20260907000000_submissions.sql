@@ -1,8 +1,10 @@
 -- Fundsy form submissions.
 --
--- Four tables rather than one polymorphic table: Amy and Ryan read these in the
--- Supabase dashboard, and named columns are far easier to work through than a
--- jsonb blob.
+-- One table. Everything conversational — questions, partnership enquiries,
+-- resume reviews — goes to fundsy.official@gmail.com instead, because that is
+-- where the team actually reads things. What is left is the one submission that
+-- genuinely benefits from structure: a find, with a category, a link and a
+-- deadline that an email would capture inconsistently.
 --
 -- SECURITY MODEL — read this before changing any policy below.
 --
@@ -43,45 +45,15 @@ comment on table public.finds is
   'Community submissions from the Share a find form. A student on the team checks each one before it goes on the board.';
 
 
--- General questions ----------------------------------------------------------
-create table public.questions (
-  id          uuid primary key default gen_random_uuid(),
-  created_at  timestamptz not null default now(),
-  name        text not null,
-  email       text not null,
-  topic       text not null,
-  message     text not null,
-  status      public.submission_status not null default 'new'
-);
-
-
--- Partnership requests -------------------------------------------------------
-create table public.partnership_requests (
-  id            uuid primary key default gen_random_uuid(),
-  created_at    timestamptz not null default now(),
-  organisation  text not null,
-  contact_name  text not null,
-  email         text not null,
-  website       text,
-  partner_type  text not null,
-  message       text,
-  status        public.submission_status not null default 'new'
-);
-
-
 -- Newest first is how every one of these is read.
 create index finds_created_at_idx                on public.finds (created_at desc);
-create index questions_created_at_idx            on public.questions (created_at desc);
-create index partnership_requests_created_at_idx on public.partnership_requests (created_at desc);
 
 
 -- RLS on, no policies. See the note at the top of this file.
 alter table public.finds                enable row level security;
-alter table public.questions            enable row level security;
-alter table public.partnership_requests enable row level security;
 
 -- Resume reviews are handled over email for now: students send a PDF to
--- hello@fundsy.org and the team replies there. That was a deliberate call —
+-- fundsy.official@gmail.com and the team replies there. That was a deliberate call —
 -- an upload endpoint means a private bucket, a consent record and a promise to
 -- delete files, all to do something an inbox already does. If it comes back,
 -- the original table and bucket are in git at commit 904796a.

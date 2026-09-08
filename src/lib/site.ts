@@ -36,7 +36,6 @@ export const FOOTER = [
     heading: "Explore",
     links: [
       { href: "/resources", label: "Student resources" },
-  { href: "/blog", label: "What\u2019s new" },
       { href: "/opportunities", label: "Opportunities" },
       { href: "/savings", label: "Savings + discounts" },
       { href: "/small-businesses", label: "Small businesses" },
@@ -68,7 +67,9 @@ export const SOCIALS = {
   instagramHandle: "@fundsyofficial",
   /* "The Fundsy Scoop" — the LinkedIn newsletter, published monthly. */
   linkedin: "https://www.linkedin.com/newsletters/the-fundsy-scoop-7381391806833360897/",
-  email: "hello@fundsy.org",
+  /* The real address, from the linktree the newsletter points at.
+     Everything on the site routes here — it is the primary channel. */
+  email: "fundsy.official@gmail.com",
 } as const;
 
 export const NEWSLETTER = {

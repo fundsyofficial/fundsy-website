@@ -104,18 +104,61 @@ same components.
 judged, and the listings are plausible, but no date, amount or deadline on this site has
 been verified. Everything needs checking by a student before it goes live.
 
-**The contact forms deliberately have no submit handler.** They call
-`preventDefault()` rather than posting to a half-built endpoint, so a student's message
-can never be silently dropped. Wiring them up is Phase 4:
+## Getting in touch: email first
 
-1. A Supabase project, then `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   in `.env.local`.
-2. Tables matching the shapes in `src/lib/content.ts`, plus a **private** bucket for
-   resumes.
-3. A server action per panel in `src/components/ContactForms.tsx`.
+**`fundsy.official@gmail.com` is the primary channel** and the contact page leads with
+it. Each purpose — a question about a listing, resume help, a partnership — gets a
+prefilled subject line, which costs nothing and makes the inbox sortable. None of those
+three has a form or a database row, because those conversations belong somewhere a person
+actually reads.
 
-The consent checkbox and the "deleted once we've sent you notes" line on the resume form
-are promises the backend has to actually keep.
+**One form survives: Share a find.** It stayed because the structure is the point. Which
+section it belongs in, the link, the deadline — those come back inconsistently when people
+write them in prose. It validates on the server, reports errors per field, keeps what was
+typed when a submission is rejected, and offers "email it instead" beside the submit
+button.
+
+Earlier versions had four forms and a resume upload. The upload went first — a private
+bucket, a consent record and a deletion promise, all to do something an inbox already does
+— and the two conversational forms followed. Both are in git if either is ever wanted
+back: the upload at `904796a`, the forms at `9b7abf5`.
+
+### The database
+
+`supabase/migrations/20260907000000_submissions.sql` creates one table, `finds`.
+
+**Read the security note at the top of that file before changing any policy.** Short
+version: RLS is on and `anon` has no policy at all. That table holds students' email
+addresses, and the anon key ships to the browser — any `anon` SELECT policy would publish
+every submission to anyone who opened devtools. The write goes through a server action
+using the service role key, which never leaves the server.
+
+Verified against the running database rather than assumed: `anon` cannot read a row,
+`anon` cannot insert, and the service role can do both.
+
+### Linking a hosted project
+
+```bash
+supabase link --project-ref <ref>
+supabase db push
+```
+
+Then set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` and
+`SUPABASE_SERVICE_ROLE_KEY` in Vercel. The service role key must **not** get a
+`NEXT_PUBLIC_` prefix.
+
+Also paste `supabase/templates/magic_link.html` into Authentication → Email Templates, and
+add the production URL to the redirect allow-list, or admin sign-in links will point at
+localhost.
+
+### Still open
+
+- Nobody is notified when a find is submitted. It sits in the table until someone opens
+  Studio. A database webhook forwarding to `fundsy.official@gmail.com` would close the last
+  gap between the form and the inbox.
+- No spam protection. A public form with no rate limit will eventually be found.
+- No admin view for finds — reading them means opening Studio. Fine for two people, and it
+  will not stay fine. Email needs none of this, which is part of why it won.
 
 ## Writing posts
 
