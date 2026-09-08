@@ -12,7 +12,7 @@
  * and never let it reach the browser.
  */
 
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 
 const ENV_PATH = new URL("../.env.local", import.meta.url);
 
