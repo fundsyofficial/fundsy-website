@@ -45,8 +45,22 @@ export async function getInstagramPosts(limit = 6): Promise<InstagramPost[] | nu
        signed and short-lived, so caching these for a day would serve dead
        images. */
     const res = await fetch(url, { next: { revalidate: 3600 } });
+
     if (!res.ok) {
-      console.error("[instagram] fetch failed", res.status, await res.text().catch(() => ""));
+      const detail = await res.json().catch(() => null);
+      const err = detail?.error;
+      /* An expired or revoked token is the failure that will actually happen,
+         because long-lived tokens only last 60 days. Say so plainly — otherwise
+         the grid quietly drops back to placeholders and nobody knows why. */
+      if (err?.type === "OAuthException" || res.status === 401) {
+        console.error(
+          `[instagram] the access token is not working: ${err?.message ?? res.status}. ` +
+            "Refresh it with `npm run ig:refresh`, or mint a new one with " +
+            "`npm run ig:token exchange <short-lived-token>`. Showing placeholder tiles until then.",
+        );
+      } else {
+        console.error("[instagram] fetch failed", res.status, err?.message ?? "");
+      }
       return null;
     }
 

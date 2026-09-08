@@ -11,7 +11,9 @@
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
     "db:studio": "open http://127.0.0.1:54323",
-    "db:editors": "node scripts/create-editors.mjs"
+    "db:editors": "node scripts/create-editors.mjs",
+    "ig:token": "node scripts/instagram-token.mjs",
+    "ig:refresh": "node scripts/instagram-token.mjs refresh"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.6",

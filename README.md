@@ -180,14 +180,43 @@ on it:
 
 1. Make @fundsyofficial a Professional account (Business or Creator) in the Instagram app
    — Settings → Account type.
-2. Create a Meta app at developers.facebook.com and add the **Instagram** product.
-3. Generate a long-lived user access token with the `instagram_business_basic` scope.
-4. Put it in `.env.local` as `INSTAGRAM_ACCESS_TOKEN`, and in Vercel's environment
-   variables for production.
+2. Create a Meta app at developers.facebook.com and add the **Instagram** product, with
+   the `instagram_business_basic` permission.
+3. Generate a token on @fundsyofficial: App Dashboard → Instagram → *API setup with
+   Instagram business login* → Generate token. **This one lasts an hour**, which is not
+   long enough to be useful.
+4. Trade it for a 60-day token. Put your app secret in `.env.local` as
+   `INSTAGRAM_APP_SECRET`, then:
 
-Long-lived tokens last 60 days and need refreshing, so this eventually wants a scheduled
-refresh. `src/lib/instagram.ts` fetches on an hourly revalidate and returns `null` on any
-failure, so an expired token degrades to the fallback rather than breaking the page.
+   ```bash
+   npm run ig:token exchange <the-one-hour-token>
+   ```
+
+5. Put the long-lived token it prints into `.env.local` as `INSTAGRAM_ACCESS_TOKEN`, and
+   into Vercel's environment variables for production.
+
+### Keeping it alive
+
+Long-lived tokens expire after 60 days. Before then:
+
+```bash
+npm run ig:refresh
+```
+
+That extends it by another 60 days from today and prints the new value, which has to be
+updated in both places. A token has to be at least 24 hours old and not yet expired to be
+refreshable — if it lapses, start again from step 3.
+
+**This is a diary entry waiting to be missed**, and the honest fix is to store the token
+in Supabase and refresh it on a schedule rather than by hand. Worth doing once there is a
+real token to store.
+
+The app degrades rather than breaks: `src/lib/instagram.ts` returns `null` on any failure
+and the grid falls back to placeholder tiles. An expired token logs a specific message
+saying which command to run, so the cause is not a mystery.
+
+`INSTAGRAM_APP_SECRET` is only used by the CLI script, never by the app. It must never
+get a `NEXT_PUBLIC_` prefix — that would ship it to every visitor's browser.
 
 ### The newsletter
 
