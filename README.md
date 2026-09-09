@@ -149,19 +149,28 @@ Vercel.**
 The database is down to one table, `posts`, which holds nothing private. No student email
 address is stored anywhere any more.
 
-### Linking a hosted project
+### The hosted project
 
-```bash
-supabase link --project-ref <ref>
-supabase db push
-```
+Linked: **`uycuehecsobmqsdkeujk`** (fundsy website, West US). The schema is pushed and the
+admin flow has been driven end to end against it — sign in, write, publish, read back from
+`/blog`.
 
-Then set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in Vercel. Those
-two are all the app needs.
+`.env.local` still points at **local** Supabase, deliberately. Local development should not
+write to the live database. Point at the hosted project only when you mean to.
 
-Also paste `supabase/templates/magic_link.html` into Authentication → Email Templates, and
-add the production URL to the redirect allow-list, or admin sign-in links will point at
-localhost.
+Still to do when the site is deployed:
+
+1. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in Vercel. Those two
+   are all the app needs — **not** the service-role key.
+2. Authentication → URL Configuration: set the Site URL to the production domain and add it
+   to the redirect allow-list. Until that happens, magic links point at `localhost:3000`.
+3. Optionally paste `supabase/templates/magic_link.html` into Authentication → Email
+   Templates. Not required — `/auth/confirm` handles both that template's `token_hash` and
+   the PKCE `code` the default template sends.
+
+`fundsy.official@gmail.com` is the only editor account. Adding another means creating the
+user in Authentication → Users **and** adding the address to `public.is_editor()` — both,
+because signing in and being allowed to write are separate gates.
 
 ## Writing posts
 
