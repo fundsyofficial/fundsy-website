@@ -2,19 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import Photo from "@/components/Photo";
-import { getPublishedPosts } from "@/lib/posts";
-
-/* Rebuilt at most once a minute, so a publish shows up quickly without
-   rendering every request from scratch. */
-export const revalidate = 60;
+import { formatDate, getPosts } from "@/lib/posts";
 
 export const metadata: Metadata = {
   title: "What's new",
   description: "Guides, deadlines and finds from the students who keep Fundsy current.",
 };
 
-export default async function BlogIndex() {
-  const posts = await getPublishedPosts(50);
+export default function BlogIndex() {
+  const posts = getPosts();
 
   return (
     <>
@@ -40,30 +36,24 @@ export default async function BlogIndex() {
             {posts.map((p) => (
               <Link
                 className="card-hair p-6 md:p-7 grid md:grid-cols-[200px_1fr] gap-5 md:gap-8 items-start"
-                key={p.id}
+                key={p.slug}
                 href={`/blog/${p.slug}`}
               >
-                {p.cover_image ? (
+                {p.coverImage ? (
                   <span
                     style={{ position: "relative", aspectRatio: "4 / 3", display: "block",
                              borderRadius: "var(--radius-sm)", overflow: "hidden" }}
                   >
-                    <Photo src={p.cover_image} alt="" tone={p.tone}
+                    <Photo src={p.coverImage} alt="" tone={p.tone}
                            style={{ position: "absolute", inset: 0 }} sizes="200px" />
                   </span>
                 ) : (
-                  <span className={`key`} style={{ background: `var(--${p.tone})`, width: 44, height: 44, borderRadius: 12 }} />
+                  <span className="key" style={{ background: `var(--${p.tone})`, width: 44, height: 44, borderRadius: 12 }} />
                 )}
                 <div>
-                  <p className="meta mb-2">
-                    {p.category}
-                    {p.published_at && ` · ${new Date(p.published_at).toLocaleDateString("en-GB", {
-                      day: "numeric", month: "long", year: "numeric" })}`}
-                  </p>
+                  <p className="meta mb-2">{p.category} &middot; {formatDate(p.date)}</p>
                   <h2 className="h3 mb-2" style={{ fontSize: "1.4rem" }}>{p.title}</h2>
-                  {p.excerpt && (
-                    <p className="text-[.9375rem]" style={{ color: "var(--ink-soft)" }}>{p.excerpt}</p>
-                  )}
+                  <p className="text-[.9375rem]" style={{ color: "var(--ink-soft)" }}>{p.excerpt}</p>
                 </div>
               </Link>
             ))}

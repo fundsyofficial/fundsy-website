@@ -1,40 +1,15 @@
-import Image from "next/image";
 import Photo from "./Photo";
-import { getInstagramPosts } from "@/lib/instagram";
 import { INSTAGRAM } from "@/lib/content";
 import { SOCIALS } from "@/lib/site";
 
-/** Six most recent posts when a token is configured; otherwise the placeholder
- *  tiles, which still link through to the profile. The page looks the same
- *  either way, so the grid is never a hole in the layout. */
-export default async function InstagramGrid() {
-  const posts = await getInstagramPosts(6);
-
-  if (posts && posts.length > 0) {
-    return (
-      <div className="grid grid-cols-3 gap-3">
-        {posts.map((p) => (
-          <a
-            className="ig"
-            key={p.id}
-            href={p.permalink}
-            target="_blank"
-            rel="noreferrer"
-            style={{ position: "relative", overflow: "hidden" }}
-          >
-            <Image
-              src={p.imageUrl}
-              alt={p.caption || `Post from ${SOCIALS.instagramHandle}`}
-              fill
-              sizes="(max-width: 640px) 30vw, 180px"
-              style={{ objectFit: "cover" }}
-            />
-          </a>
-        ))}
-      </div>
-    );
-  }
-
+/** Six tiles linking through to the profile.
+ *
+ *  These are pictures kept in the repo, not live posts. Pulling real posts
+ *  would need an Instagram Graph API token, which means an access token to
+ *  store, rotate every 60 days and keep out of the browser — deliberately not
+ *  how this site works. Swap the images in src/lib/content.ts when the ones
+ *  here go stale. */
+export default function InstagramGrid() {
   return (
     <div className="grid grid-cols-3 gap-3">
       {INSTAGRAM.map((p) => (

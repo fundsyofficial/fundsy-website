@@ -1,9 +1,9 @@
-/** Content for the six sections built out in Phase 3.
+/** Editorial content for About, Opportunities, Savings, Small businesses,
+ *  Our team and the Newsletter.
  *
- *  Same caveat as content.ts: hand-written stand-in copy so the layouts can be
- *  judged with real sentences. Every listing here needs checking by a student
- *  before it goes live — the dates, amounts and deadlines are plausible, not
- *  verified. In Phase 4+ this comes from Supabase. */
+ *  Same as content.ts: edit here, redeploy. Every listing needs checking by a
+ *  student before it goes live — the dates, amounts and deadlines are
+ *  plausible, not verified. */
 
 import type { Deadline, FeaturedItem } from "@/components/FeaturedRail";
 import type { Tone } from "@/lib/site";

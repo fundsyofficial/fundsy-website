@@ -1,55 +1,75 @@
-import { supabaseServer } from "@/lib/supabase/server-client";
-import { supabasePublic } from "@/lib/supabase/public-client";
+import type { Tone } from "@/lib/site";
 
-import type { Post } from "@/lib/post-types";
+/** Posts, written in code.
+ *
+ *  There is no CMS and no database. To publish, add an entry to POSTS below
+ *  and deploy — the blog index, the post page and the homepage rail all read
+ *  from here.
+ *
+ *  `body` is Markdown. Use a template literal so it can span lines; blank lines
+ *  separate paragraphs, `##` makes a heading, `- ` a list item.
+ *
+ *  Newest first — the order in this array is the order on the site. */
 
-export * from "@/lib/post-types";
+export type Post = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  body: string;
+  category: string;
+  coverImage?: string;
+  tone: Tone;
+  /** ISO date, e.g. "2026-09-12". Shown on the post and in the rail. */
+  date: string;
+  author?: string;
+};
 
-/** Published posts, newest first. Read as `anon`, so RLS makes drafts
- *  unreachable here regardless of who is signed in. */
-export async function getPublishedPosts(limit = 20): Promise<Post[]> {
-  const supabase = supabasePublic();
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("published", true)
-    .order("published_at", { ascending: false })
-    .limit(limit);
+export const POSTS: Post[] = [
+  {
+    slug: "free-groceries-on-thursdays-campus-by-campus",
+    title: "Free groceries on Thursdays, campus by campus",
+    excerpt:
+      "Four DFW pantries that never ask for paperwork, with the hours that are actually right this semester.",
+    category: "Student resources",
+    coverImage: "/assets/img/pantry.jpg",
+    tone: "mint",
+    date: "2026-09-12",
+    author: "Amy",
+    body: `## What you need
 
-  if (error) {
-    console.error("[posts] list failed", error);
-    return [];
-  }
-  return (data ?? []) as Post[];
+A student ID. That is the whole list — no income paperwork, no referral, no appointment.
+
+## Where and when
+
+- **UT Dallas** — Comet Cupboard, Thursdays 11am to 3pm
+- **UT Arlington** — Thursdays 12pm to 4pm
+- **UNT** — Wednesdays and Thursdays, 10am to 2pm
+- **Dallas College** — varies by campus, check before you go
+
+Bring a tote. They run out of bags by the afternoon, and produce arrives on Thursday
+mornings, so going early is worth it.
+
+> If the shelves look picked over, ask. There is usually more in the back.
+
+We re-check these hours every semester, because they change more often than anyone
+announces.`,
+  },
+];
+
+/** Newest first. */
+export function getPosts(): Post[] {
+  return [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
 }
 
-export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const supabase = supabasePublic();
-  const { data, error } = await supabase.from("posts").select("*").eq("slug", slug).maybeSingle();
-
-  /* Null means "no such post" and the caller renders a 404. A query that
-     *failed* is a different thing entirely — if the database is unreachable,
-     returning null would 404 a live post, and Next would cache that. Throwing
-     surfaces an error page instead, which is honest and not cached. */
-  if (error) {
-    console.error("[posts] fetch failed", error);
-    throw new Error(`Could not load the post "${slug}": ${error.message}`);
-  }
-  return (data as Post) ?? null;
+export function getPostBySlug(slug: string): Post | undefined {
+  return POSTS.find((p) => p.slug === slug);
 }
 
-/** Everything, drafts included. Only returns rows for a signed-in editor —
- *  RLS decides, not this function. */
-export async function getAllPostsForEditor(): Promise<Post[]> {
-  const supabase = await supabaseServer();
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .order("updated_at", { ascending: false });
-
-  if (error) {
-    console.error("[posts] editor list failed", error);
-    return [];
-  }
-  return (data ?? []) as Post[];
+/** For dates in the UI. Written out rather than numeric, to match the rail. */
+export function formatDate(iso: string): string {
+  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 }

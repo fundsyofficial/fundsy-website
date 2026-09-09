@@ -3,15 +3,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PhotoCard from "@/components/PhotoCard";
 import PostBody from "@/components/PostBody";
-import { getPostBySlug, getPublishedPosts } from "@/lib/posts";
+import { formatDate, getPostBySlug, getPosts } from "@/lib/posts";
 
-/* Rebuilt at most once a minute, so a publish shows up quickly without
-   rendering every request from scratch. */
-export const revalidate = 60;
-
-export async function generateStaticParams() {
-  const posts = await getPublishedPosts(100);
-  return posts.map((p) => ({ slug: p.slug }));
+/** Every post is known at build time, so every post page is static. */
+export function generateStaticParams() {
+  return getPosts().map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -20,24 +16,23 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = getPostBySlug(slug);
   if (!post) return { title: "Not found" };
   return {
     title: post.title,
-    description: post.excerpt ?? undefined,
+    description: post.excerpt,
     openGraph: {
       title: post.title,
-      description: post.excerpt ?? undefined,
+      description: post.excerpt,
       type: "article",
-      publishedTime: post.published_at ?? undefined,
+      publishedTime: post.date,
     },
   };
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
-  /* Read as anon, so RLS has already made drafts unreachable. */
+  const post = getPostBySlug(slug);
   if (!post) notFound();
 
   return (
@@ -55,18 +50,15 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         <p className="meta mb-8">
           {post.author && `${post.author} · `}
-          {post.published_at
-            ? new Date(post.published_at).toLocaleDateString("en-GB", {
-                day: "numeric", month: "long", year: "numeric" })
-            : "Unpublished"}
+          {formatDate(post.date)}
           {` · ${post.category}`}
         </p>
 
-        {post.cover_image && (
+        {post.coverImage && (
           <PhotoCard
             className="mb-10"
             style={{ height: 340 }}
-            src={post.cover_image}
+            src={post.coverImage}
             alt=""
             tone={post.tone}
             title=""
@@ -75,9 +67,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           />
         )}
 
-        {post.excerpt && (
-          <p className="prose text-[1.0625rem] mb-8" style={{ fontWeight: 500 }}>{post.excerpt}</p>
-        )}
+        <p className="prose text-[1.0625rem] mb-8" style={{ fontWeight: 500 }}>{post.excerpt}</p>
 
         <PostBody>{post.body}</PostBody>
       </article>

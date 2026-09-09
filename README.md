@@ -5,18 +5,13 @@ college students in Dallas–Fort Worth actually use.
 
 ## Running it
 
-You need Docker running for the database.
-
 ```bash
 npm install
-cp .env.example .env.local
-npm run db:start      # starts local Supabase, prints the keys
 npm run dev
 ```
 
-Put the values `db:start` prints into `.env.local` — the Project URL and the anon key.
-The service role key is only needed by `npm run db:editors`; the app itself never reads
-it. Then open http://localhost:3000.
+That is the whole setup. **The site reads no environment variables and talks to no
+database.** There is nothing to configure, no `.env` file, no services to sign into.
 
 | Command | |
 | --- | --- |
@@ -24,42 +19,62 @@ it. Then open http://localhost:3000.
 | `npm run build` | Production build |
 | `npm start` | Serve the production build |
 | `npm run lint` | ESLint |
-| `npm run db:start` | Start local Supabase |
-| `npm run db:stop` | Stop it |
-| `npm run db:reset` | Wipe and re-apply migrations |
-| `npm run db:studio` | Open Supabase Studio (127.0.0.1:54323) |
-| `npm run db:editors` | Recreate the local editor accounts after a reset |
 
-The database holds posts and nothing else. Nothing a visitor does writes to it.
+Every page is prerendered as static HTML at build time.
 
-## Where things are
+## Editing the site
 
+All content is in code. Change a file, commit, deploy.
+
+| What | Where |
+| --- | --- |
+| Homepage hero, mosaic, section tiles, Instagram tiles | `src/lib/content.ts` |
+| Student resources listings | `src/lib/content.ts` (`RESOURCE_*`) and `src/lib/pages.ts` |
+| Opportunities, Savings listings | `src/lib/pages.ts` |
+| About, team, businesses, newsletter editions | `src/lib/pages.ts` |
+| Blog posts | `src/lib/posts.ts` |
+| Nav, footer, section colours, email, socials | `src/lib/site.ts` |
+| Photographs | `public/assets/img/` |
+
+### Adding a blog post
+
+Add an entry to `POSTS` in `src/lib/posts.ts`:
+
+```ts
+{
+  slug: "where-to-eat-for-under-ten-dollars",
+  title: "Where to eat for under ten dollars near every campus",
+  excerpt: "One or two sentences. This shows on the blog index and the homepage rail.",
+  category: "Student resources",
+  coverImage: "/assets/img/market.jpg",
+  tone: "mint",
+  date: "2026-10-02",
+  author: "Amy",
+  body: `## A heading
+
+A paragraph. Blank lines separate paragraphs.
+
+- a list item
+- another`,
+}
 ```
-src/app/          routes — one folder per page
-src/app/styles/   base.css (structure) + theme.css (skin)
-src/components/   the design system
-src/lib/site.ts   navigation, section colours, socials
-src/lib/content.ts  placeholder editorial content (homepage, resources)
-src/lib/pages.ts    placeholder editorial content (the other sections)
-src/lib/posts.ts    posts, read from Supabase
-public/assets/img   placeholder photography (see the warning below)
-wireframes/       the Phase 1 static HTML, kept for reference
-```
+
+`body` is Markdown. The post appears at `/blog/<slug>`, on `/blog`, and the three most
+recent fill the Featured rail on the homepage. Ordering is by `date`, newest first.
 
 ## The design system
 
 Structure and skin are separate on purpose, and that split should survive:
 
-- **`base.css`** is layout only — the grid, the bento mosaic, the featured rail, forms.
-  It contains no colour and no typeface decisions.
+- **`base.css`** is layout only — the grid, the bento mosaic, the featured rail. It
+  contains no colour and no typeface decisions.
 - **`theme.css`** is the entire visual identity. Swapping the design direction is
   swapping this one file. Nine earlier directions live in `wireframes/alternates/`.
 
 Both are imported **into a cascade layer** in `globals.css`. That matters: Tailwind v4
 puts utilities in `@layer utilities`, and unlayered CSS beats every layered rule
-regardless of specificity — imported plainly, `h1,h2,h3,h4{margin:0}` silently
-overrides every `mb-*` utility in the markup. Keep the `layer(components)` on those
-imports.
+regardless of specificity — imported plainly, `h1,h2,h3,h4{margin:0}` silently overrides
+every `mb-*` utility in the markup. Keep the `layer(components)` on those imports.
 
 ### Rules worth keeping
 
@@ -77,215 +92,63 @@ nav dot.
 
 **Motion:** one moment only, and `prefers-reduced-motion` is respected.
 
+**The favicon** is the wordmark's lowercase `f` in Archivo 800 on pastel pink —
+`src/app/icon.png`, `apple-icon.png` and `favicon.ico`.
+
 ### Known gap
 
-Earlier directions used **shadow to mean clickable**. This one has no shadows, so a
-tile you can click and a card you only read look identical. That needs solving — most
-cheaply as a border-weight or background difference on interactive cards.
+Earlier directions used **shadow to mean clickable**. This one has no shadows, so a tile
+you can click and a card you only read look identical. That needs solving — most cheaply
+as a border-weight or background difference on interactive cards.
 
-## Status
+## Getting in touch: email
 
-| Phase | |
-| --- | --- |
-| 1 — Wireframes | Done. `wireframes/` |
-| 2 — Next.js + Tailwind | Done |
-| 3 — Component migration | Done. All nine pages built |
-| 4 — Forms | Dropped. Everything is email; see below |
-| Posts / CMS | Done. `/admin`, magic-link sign-in, drafts, Markdown |
-| 5 — Vercel | **Not started** |
+**`fundsy.official@gmail.com`** is the only channel and the contact page leads with it.
+Each purpose — a question about a listing, resume help, a partnership, sharing a find —
+gets a prefilled subject and, for finds, a body template.
 
-All nine pages are built. Student resources, Opportunities and Savings are the same
-`<SectionPage>` component with different data — a banded header, a rail carrying on-page
-nav plus Featured plus deadlines, and categories introduced by a photo card. Categories
-can vary their listing layout (`rows`, `pairs`, `trio`) so a page never reads as one
-repeated shape.
-
-About, Small businesses, Our team and Newsletter have their own layouts, built from the
-same components.
-
-**All copy is placeholder.** The sentences are real sentences so the layouts can be
-judged, and the listings are plausible, but no date, amount or deadline on this site has
-been verified. Everything needs checking by a student before it goes live.
-
-## Getting in touch: email first
-
-**`fundsy.official@gmail.com` is the primary channel** and the contact page leads with
-it. Each purpose — a question about a listing, resume help, a partnership — gets a
-prefilled subject line, which costs nothing and makes the inbox sortable. None of those
-three has a form or a database row, because those conversations belong somewhere a person
-actually reads.
-
-**There are no forms on the public site at all.** "Share a find" is an email too — the
-button prefills a subject and a body template (what it is, where, a link, how it works,
-the deadline), so people don't have to guess what's useful and we don't have to parse
-prose.
-
-That template is the old form's fields, moved into the email body. The same information
-arrives, in a place someone actually reads.
-
-### Why the forms went
-
-They worked. The problem was where the submissions landed: a Postgres table nobody was
-notified about. A find would sit there until someone remembered to open Supabase Studio,
-which is not a workflow — it's a way to lose things quietly. Wiring up email forwarding
-would have fixed the symptom while keeping a database, a service-role key and a spam
-surface, all to deliver a message to an inbox.
-
-The whole path went in stages, and each one is in git if it's ever wanted back:
-
-| | |
-| --- | --- |
-| Resume upload — private bucket, consent record, deletion promise | `904796a` |
-| General question and Partner with us forms | `9b7abf5` |
-| Share a find form, `finds` table, zod validation | `f0f2001` |
-
-### What this bought
-
-**The app no longer uses the service-role key.** Nothing under `src/` reads it, and CI
-does not set it. That key bypasses Row Level Security, and it now exists in exactly one
-place: `scripts/create-editors.mjs`, a local development script. **Do not set it in
-Vercel.**
-
-The database is down to one table, `posts`, which holds nothing private. No student email
-address is stored anywhere any more.
-
-### The hosted project
-
-Linked: **`uycuehecsobmqsdkeujk`** (fundsy website, West US). The schema is pushed and the
-admin flow has been driven end to end against it — sign in, write, publish, read back from
-`/blog`.
-
-`.env.local` still points at **local** Supabase, deliberately. Local development should not
-write to the live database. Point at the hosted project only when you mean to.
-
-Still to do when the site is deployed:
-
-1. Set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` in Vercel. Those two
-   are all the app needs — **not** the service-role key.
-2. Authentication → URL Configuration: set the Site URL to the production domain and add it
-   to the redirect allow-list. Until that happens, magic links point at `localhost:3000`.
-3. Optionally paste `supabase/templates/magic_link.html` into Authentication → Email
-   Templates. Not required — `/auth/confirm` handles both that template's `token_hash` and
-   the PKCE `code` the default template sends.
-
-`fundsy.official@gmail.com` is the only editor account. Adding another means creating the
-user in Authentication → Users **and** adding the address to `public.is_editor()` — both,
-because signing in and being allowed to write are separate gates.
-
-## Writing posts
-
-The site is a blog: Amy and Ryan write posts at **`/admin`** and they appear on
-`/blog`, on the homepage rail, and at `/blog/<slug>` — no deploy, no developer.
-
-Sign-in is a magic link. There are no passwords to lose, and no self-signup: an address
-has to already exist as a user *and* be listed in `public.is_editor()` in
-`supabase/migrations/20260908000000_posts.sql`. Two gates on purpose — being able to sign
-in is not the same as being allowed to write.
-
-Locally, `supabase db reset` wipes the auth users along with everything else, so recreate
-them with `npm run db:editors`, then take the sign-in link out of Mailpit at
-http://127.0.0.1:54324.
-
-**Drafts are genuinely invisible.** Public pages read the database as `anon`, and the RLS
-policy only exposes rows where `published = true` — so an unpublished post 404s rather
-than relying on a filter in application code that someone could forget. Verified against
-the running database: anon sees only published rows, a signed-in non-editor also sees only
-published rows and cannot write at all, and an editor sees everything.
-
-If the database is unreachable, a post page raises an error rather than returning a 404 —
-a live post 404-ing because Postgres blinked would get cached, and read as permanently
-gone. The blog index degrades to its empty state instead, which is the right trade for a
-list.
-
-Post bodies are Markdown, rendered with react-markdown. Raw HTML is not enabled and
-nothing goes through `dangerouslySetInnerHTML`, so a post cannot inject script into the
-page even if an editor account were compromised.
-
-### What is not editable yet
-
-Posts are. The category-page listings on Student resources, Opportunities and Savings are
-still in `src/lib/pages.ts` and need a developer. Moving those into the database is the
-obvious next step and would reuse everything the posts table already does.
+**There are no forms anywhere on the site.** No submissions, no database, no inbox to
+remember to check. A form's whole job here was to deliver a message to that address, and
+an email does it without a service to maintain.
 
 ## Instagram and the newsletter
 
-The site links to the real accounts: [@fundsyofficial](https://www.instagram.com/fundsyofficial/)
-and **The Fundsy Scoop** on LinkedIn. The newsletter page lists every real edition, with
-links straight through to LinkedIn.
+Both link out: [@fundsyofficial](https://www.instagram.com/fundsyofficial/) and **The
+Fundsy Scoop** on LinkedIn. The newsletter page lists every real edition with its own
+opening line, taken from each issue's public preview.
 
-### Instagram posts need a token — there is no way around it
+The Instagram tiles on the homepage are **pictures kept in the repo**, not live posts.
+Pulling real posts needs an Instagram Graph API token, which means a secret to store and
+rotate every 60 days — deliberately not how this site works. Swap the images in
+`src/lib/content.ts` when they go stale.
 
-The homepage grid shows the six most recent posts **once `INSTAGRAM_ACCESS_TOKEN` is
-set**. Until then it falls back to placeholder tiles that link to the profile, so the
-layout never has a hole in it.
+## Status
 
-It cannot work without a token, and that is worth understanding before anyone spends time
-on it:
+| | |
+| --- | --- |
+| Design, all nine pages | Done |
+| Blog | Done, posts in `src/lib/posts.ts` |
+| Deployment | **Not started** |
 
-- The public profile page returns 200 and its meta tags carry the follower and post
-  counts, but **the HTML contains no posts at all** — Instagram renders them client-side
-  behind an auth check.
-- The old public oEmbed endpoint now redirects, and Instagram Basic Display was shut
-  down in 2024.
-- Scraping is not a shortcut worth taking. It breaks Instagram's terms, the media URLs
-  are short-lived signed CDN links that cannot be stored, and the markup changes without
-  notice. This repo deliberately contains no scraper.
+Deploying is `vercel` against this repo, with nothing to configure.
 
-**To switch it on:**
+## ⚠ Before this goes live
 
-1. Make @fundsyofficial a Professional account (Business or Creator) in the Instagram app
-   — Settings → Account type.
-2. Create a Meta app at developers.facebook.com and add the **Instagram** product, with
-   the `instagram_business_basic` permission.
-3. Generate a token on @fundsyofficial: App Dashboard → Instagram → *API setup with
-   Instagram business login* → Generate token. **This one lasts an hour**, which is not
-   long enough to be useful.
-4. Trade it for a 60-day token. Put your app secret in `.env.local` as
-   `INSTAGRAM_APP_SECRET`, then:
+**The photographs in `public/assets/img/` are placeholders from a stock placeholder
+service and are not licensed for Fundsy to publish.** Every one has to be replaced —
+with photos the team shoots, photos a business gives permission for, or properly
+licensed stock. They are here so the layouts can be judged against real pictures.
 
-   ```bash
-   npm run ig:token exchange <the-one-hour-token>
-   ```
+Useful sizes: the mosaic lead wants a portrait crop around 900×1200, the wide cells
+1000×700, the rail thumbs anything square, the category headers 1000×700.
 
-5. Put the long-lived token it prints into `.env.local` as `INSTAGRAM_ACCESS_TOKEN`, and
-   into Vercel's environment variables for production.
+**All listing copy is unverified.** The sentences are real sentences so the layouts can
+be judged, and the listings are plausible, but no date, amount, deadline or business
+detail has been checked.
 
-### Keeping it alive
-
-Long-lived tokens expire after 60 days. Before then:
-
-```bash
-npm run ig:refresh
-```
-
-That extends it by another 60 days from today and prints the new value, which has to be
-updated in both places. A token has to be at least 24 hours old and not yet expired to be
-refreshable — if it lapses, start again from step 3.
-
-**This is a diary entry waiting to be missed**, and the honest fix is to store the token
-in Supabase and refresh it on a schedule rather than by hand. Worth doing once there is a
-real token to store.
-
-The app degrades rather than breaks: `src/lib/instagram.ts` returns `null` on any failure
-and the grid falls back to placeholder tiles. An expired token logs a specific message
-saying which command to run, so the cause is not a mystery.
-
-`INSTAGRAM_APP_SECRET` is only used by the CLI script, never by the app. It must never
-get a `NEXT_PUBLIC_` prefix — that would ship it to every visitor's browser.
-
-### The newsletter
-
-`ISSUES` in `src/lib/pages.ts` is a hand-maintained list of editions. Titles, links and
-excerpts all come from the newsletter's own public pages, so every word shown is Amy's —
-nothing is summarised or paraphrased here. Add a row when a new edition goes out; LinkedIn
-has no public API for this.
-
-## ⚠ Photography
-
-The images in `public/assets/img/` are **placeholders from a stock placeholder service
-and are not licensed for Fundsy to publish.** Every one must be replaced before launch —
-with photos the team shoots, photos a business gives permission for, or properly licensed
-stock. They are here so the layouts can be judged against real pictures.
+**The team page has invented people on it.** Amy's name is real — it is the byline on
+the newsletter. Ryan's surname is marked `[surname needed]` rather than guessed, and all
+six ambassadors, their schools, majors and bios were made up to fill the layout.
 
 Team avatars are initials rather than faces on purpose: a stock portrait standing in for
 a named ambassador is worse than an obvious placeholder.

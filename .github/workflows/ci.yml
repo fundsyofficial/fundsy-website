@@ -36,11 +36,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      # No env block, and there should never be one: the site reads no
+      # environment variables at all. If this step ever needs a secret to
+      # build, something has been added that does not belong.
       - name: Build
         run: npm run build
-        env:
-          # The build must not depend on real credentials. If it starts to,
-          # this step fails and that is the signal to fix it.
-          NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: ci-placeholder-anon-key
-          # No service-role key here, deliberately. The app does not use one.

@@ -18,26 +18,19 @@ import {
 import InstagramGrid from "@/components/InstagramGrid";
 import type { FeaturedItem } from "@/components/FeaturedRail";
 import { NEWSLETTER, SOCIALS } from "@/lib/site";
-import { getPublishedPosts } from "@/lib/posts";
+import { formatDate, getPosts } from "@/lib/posts";
 
-/* Rebuilt at most once a minute so a newly published post reaches the
-   homepage without waiting for a deploy. */
-export const revalidate = 60;
-
-export default async function Home() {
-  /* Real posts when there are any; the curated list until then, so the rail is
-     never an empty column on a fresh install. */
-  const posts = await getPublishedPosts(3);
+export default function Home() {
+  /* The three most recent posts, or the curated list while there are fewer
+     than three written. */
+  const posts = getPosts().slice(0, 3);
   const featured: FeaturedItem[] =
     posts.length > 0
       ? posts.map((p) => ({
           href: `/blog/${p.slug}`,
-          date: p.published_at
-            ? new Date(p.published_at).toLocaleDateString("en-GB", {
-                day: "numeric", month: "long", year: "numeric" })
-            : "",
+          date: formatDate(p.date),
           title: p.title,
-          src: p.cover_image ?? "/assets/img/library.jpg",
+          src: p.coverImage ?? "/assets/img/library.jpg",
           alt: "",
           tone: p.tone,
         }))

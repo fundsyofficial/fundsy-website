@@ -1,9 +1,11 @@
-/** Placeholder editorial content.
+/** Editorial content for the homepage and the resources page.
  *
- *  Everything here is hand-written stand-in copy so the layouts can be judged
- *  with real sentences instead of lorem ipsum. In Phase 4 the listings, the
- *  mosaic and the rail all come from Supabase; the shapes below are what those
- *  queries need to return, so treat them as the schema sketch. */
+ *  This is where the site's copy lives. Edit it here and redeploy — there is no
+ *  CMS and no database by design.
+ *
+ *  The sentences are hand-written stand-ins so the layouts can be judged with
+ *  real prose, but nothing has been fact-checked. Every date, amount and
+ *  deadline needs verifying before it goes live. */
 
 import type { MosaicData } from "@/components/BoardMosaic";
 import type { Deadline, FeaturedItem } from "@/components/FeaturedRail";
